@@ -23,30 +23,6 @@ class Mountain: CAShapeLayer {
         }
     }
     
-//    private var minWidth: CGFloat {
-//        get {
-//            return background ? 72 : 144
-//        }
-//    }
-//    
-//    private var maxWidth: CGFloat {
-//        get {
-//            return background ? 172 : 344
-//        }
-//    }
-//    
-//    private var minHeight: CGFloat {
-//        get {
-//            return background ? 96 : 192
-//        }
-//    }
-//    
-//    private var maxHeight: CGFloat {
-//        get {
-//            return background ? 148 : 296
-//        }
-//    }
-    
     private var minWidth: CGFloat {
         get {
             return background ? 72 : 248

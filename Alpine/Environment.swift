@@ -58,8 +58,6 @@ struct Environment {
                     return UIColor(red: 37/255, green: 10/255, blue: 70/255, alpha: 1)
                 case .Winter:
                     return MaterialColors.Cyan.P900.color
-                default:
-                    break
                 }
             default:
                 break
@@ -148,12 +146,4 @@ struct Environment {
     }
     
     var precipitationType: PrecipitationType?
-    
-//    static func forestDaytime() -> Environment {
-//        return Environment(time: .Day, skyColor: UIColor.green50(), distantMountainColor: UIColor.green150(), nearMountainColor: UIColor.green300(), hillColor: UIColor.green500(), precipitationType: .None)
-//    }
-//    
-//    static func snowDaytime() -> Environment {
-//        return Environment(time: .Day, skyColor: UIColor.cyan100(), distantMountainColor: UIColor.cyan150(), nearMountainColor: UIColor.cyan300(), hillColor: UIColor.cyan50(), precipitationType: .Snow)
-//    }
 }

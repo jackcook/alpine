@@ -28,6 +28,8 @@ class LandscapeLayer: CALayer {
         
         backgroundColor = environment.skyColor.CGColor
         
+        renderStars()
+        
         distantMountains = CALayer()
         addSublayer(distantMountains)
         
@@ -64,6 +66,13 @@ class LandscapeLayer: CALayer {
     }
     
     // MARK: Private Methods
+    
+    private func renderStars() {
+        for _ in 0...100 {
+            let star = Star()
+            addSublayer(star)
+        }
+    }
     
     private func renderDistantHills() {
         let bounds = UIScreen.mainScreen().bounds
