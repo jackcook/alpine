@@ -31,12 +31,12 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         view.layer.addSublayer(landscape)
         
         snow = SnowLayer()
-        view.layer.addSublayer(snow)
         
         contentView = UIScrollView()
         contentView.delegate = self
         contentView.showsVerticalScrollIndicator = false
         
+        contentView.layer.addSublayer(snow)
         view.addSubview(contentView)
         
         renderContentView()
@@ -84,7 +84,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         
         temperatureLabel = UILabel()
         temperatureLabel.font = UIFont.systemFontOfSize(96, weight: UIFontWeightRegular)
-        temperatureLabel.text = "25º"
+        temperatureLabel.text = "25°"
         temperatureLabel.textColor = UIColor.whiteColor()
         contentView.addSubview(temperatureLabel)
     }

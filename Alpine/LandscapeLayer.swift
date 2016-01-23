@@ -26,9 +26,9 @@ class LandscapeLayer: CALayer {
         }
     }
     
-    private var distantHills: CALayer!
-    private var foregroundHills: CALayer!
-    private var superForegroundHills: CALayer!
+    private var distantMountains: CALayer!
+    private var nearMountains: CALayer!
+    private var hills: CALayer!
     
     private let fullHeight: CGFloat = 2000
     
@@ -37,18 +37,18 @@ class LandscapeLayer: CALayer {
         
         skyColor = UIColor.cyan100()
         
-        distantHills = CALayer()
-        addSublayer(distantHills)
+        distantMountains = CALayer()
+        addSublayer(distantMountains)
         
         renderDistantHills()
         
-        foregroundHills = CALayer()
-        addSublayer(foregroundHills)
+        nearMountains = CALayer()
+        addSublayer(nearMountains)
         
         renderForegroundHills()
         
-        superForegroundHills = CALayer()
-        addSublayer(superForegroundHills)
+        hills = CALayer()
+        addSublayer(hills)
         
         renderSuperForegroundHills()
     }
@@ -65,9 +65,9 @@ class LandscapeLayer: CALayer {
         CATransaction.begin()
         CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
         
-        distantHills.frame = CGRectMake(0, -offset / 3, bounds.width, fullHeight)
-        foregroundHills.frame = CGRectMake(0, -offset / 2, bounds.width, fullHeight)
-        superForegroundHills.frame = CGRectMake(0, -offset / 1, bounds.width, fullHeight)
+        distantMountains.frame = CGRectMake(0, -offset / 3, bounds.width, fullHeight)
+        nearMountains.frame = CGRectMake(0, -offset / 2, bounds.width, fullHeight)
+        hills.frame = CGRectMake(0, -offset / 1, bounds.width, fullHeight)
         
         CATransaction.commit()
     }
@@ -78,38 +78,26 @@ class LandscapeLayer: CALayer {
         let bounds = UIScreen.mainScreen().bounds
         let color = UIColor.cyan150()
         
-        let baseY: CGFloat = 216
-        let minWidth: CGFloat = 72
-        let maxWidth: CGFloat = 172
-        let minHeight: CGFloat = 96
-        let maxHeight: CGFloat = 148
         let minDistance: CGFloat = 30
         let maxDistance: CGFloat = 45
         
-        var x: CGFloat = -minWidth / 2
+        let baseY: CGFloat = 216
+        
+        var x: CGFloat = -72 / 2
         while x < bounds.width {
-            let width = CGFloat(arc4random_uniform(UInt32(maxWidth - minWidth))) + minWidth
-            let height = CGFloat(arc4random_uniform(UInt32(maxHeight - minHeight))) + minHeight
+            let mountain = Mountain(background: true)
+            mountain.frame = CGRectMake(x, baseY - mountain.bounds.height, mountain.bounds.width, mountain.bounds.height)
             
-            let path = UIBezierPath()
-            path.moveToPoint(CGPointMake(x, baseY))
-            path.addLineToPoint(CGPointMake(x + width, baseY))
-            path.addLineToPoint(CGPointMake(x + (width / 2), baseY - height))
-            path.closePath()
+            let distance = CGFloat(arc4random_uniform(UInt32(maxDistance - minDistance))) + minDistance
+            x += mountain.bounds.width * distance / 100
             
-            x += width * (CGFloat(arc4random_uniform(UInt32(maxDistance - minDistance))) + minDistance) / 100
-            
-            let shape = CAShapeLayer()
-            shape.fillColor = color.CGColor
-            shape.path = path.CGPath
-            
-            distantHills.addSublayer(shape)
+            distantMountains.addSublayer(mountain)
         }
         
         let fillLayer = CALayer()
         fillLayer.backgroundColor = color.CGColor
         fillLayer.frame = CGRectMake(0, baseY, bounds.width, fullHeight - baseY)
-        distantHills.addSublayer(fillLayer)
+        distantMountains.addSublayer(fillLayer)
     }
     
     private func renderForegroundHills() {
@@ -117,77 +105,38 @@ class LandscapeLayer: CALayer {
         let color = UIColor.cyan300()
         
         let baseY: CGFloat = 464
-        let minWidth: CGFloat = 144
-        let maxWidth: CGFloat = 344
-        let minHeight: CGFloat = 192
-        let maxHeight: CGFloat = 296
         let minDistance: CGFloat = 40
         let maxDistance: CGFloat = 60
         
-        var x: CGFloat = -minWidth / 3
+        var x: CGFloat = -144 / 3
         while x < bounds.width {
-            let width = CGFloat(arc4random_uniform(UInt32(maxWidth - minWidth))) + minHeight
-            let height = CGFloat(arc4random_uniform(UInt32(maxHeight - minHeight))) + minHeight
+            let mountain = Mountain(background: false)
+            mountain.frame = CGRectMake(x, baseY - mountain.bounds.height, mountain.bounds.width, mountain.bounds.height)
             
-            let path = UIBezierPath()
-            path.moveToPoint(CGPointMake(x, baseY))
-            path.addLineToPoint(CGPointMake(x + width, baseY))
-            path.addLineToPoint(CGPointMake(x + (width / 2), baseY - height))
-            path.closePath()
+            let distance = CGFloat(arc4random_uniform(UInt32(maxDistance - minDistance))) + minDistance
+            x += mountain.bounds.width * distance / 100
             
-            x += width * (CGFloat(arc4random_uniform(UInt32(maxDistance - minDistance))) + minDistance) / 100
-            
-            let color = UIColor.cyan300()
-            
-            let shape = CAShapeLayer()
-            shape.fillColor = color.CGColor
-            shape.path = path.CGPath
-            
-            foregroundHills.addSublayer(shape)
+            nearMountains.addSublayer(mountain)
         }
         
         let fillLayer = CALayer()
         fillLayer.backgroundColor = color.CGColor
         fillLayer.frame = CGRectMake(0, baseY, bounds.width, fullHeight - baseY)
-        foregroundHills.addSublayer(fillLayer)
+        nearMountains.addSublayer(fillLayer)
     }
     
     private func renderSuperForegroundHills() {
         let bounds = UIScreen.mainScreen().bounds
         let color = UIColor.cyan50()
         
-        let baseY: CGFloat = 500
-        let minVariance: CGFloat = 22.5
-        let maxVariance: CGFloat = 25
+        let hill = Hill()
+        hill.frame = CGRectMake(0, 500, bounds.width, 100)
         
-        let a = CGFloat(arc4random_uniform(75)) / 50 + 0.5
-        let b = CGFloat(arc4random_uniform(75)) / 50 + 0.5
-        let c = CGFloat(arc4random_uniform(75)) / 50 + 0.5
+        let fillLayer = CALayer()
+        fillLayer.backgroundColor = color.CGColor
+        fillLayer.frame = CGRectMake(0, 600, bounds.width, 2000)
         
-        let v = CGFloat(arc4random_uniform(UInt32(maxVariance - minVariance))) + minVariance
-        
-        let path = UIBezierPath()
-        path.moveToPoint(CGPointMake(0, baseY))
-        
-        var x: CGFloat = 0
-        while x < bounds.width {
-            path.addLineToPoint(CGPointMake(x, (getHillCurve(a, b, c, v, x) * 10) + baseY))
-            x += 1
-        }
-        
-        path.addLineToPoint(CGPointMake(bounds.width, fullHeight))
-        path.addLineToPoint(CGPointMake(0, fullHeight))
-        
-        path.closePath()
-        
-        let shape = CAShapeLayer()
-        shape.fillColor = color.CGColor
-        shape.path = path.CGPath
-        
-        superForegroundHills.addSublayer(shape)
-    }
-    
-    func getHillCurve(a: CGFloat, _ b: CGFloat, _ c: CGFloat, _ v: CGFloat, _ x: CGFloat) -> CGFloat {
-        return sin(a * x / 25) + sin(b * x / 25) + sin(c * x / 25)
+        hills.addSublayer(hill)
+        hills.addSublayer(fillLayer)
     }
 }
