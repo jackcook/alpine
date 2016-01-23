@@ -14,7 +14,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     // MARK: Properties
     
     private var landscape: LandscapeLayer!
-    private var snow: SnowLayer!
+    private var precipitation: PrecipitationLayer!
     
     private var contentView: UIScrollView!
     private var locationLabel: UILabel!
@@ -27,28 +27,33 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        landscape = LandscapeLayer()
-        view.layer.addSublayer(landscape)
+        let environment = Environment.forestDaytime()
         
-        snow = SnowLayer()
+        landscape = LandscapeLayer(environment: environment)
+        view.layer.addSublayer(landscape)
         
         contentView = UIScrollView()
         contentView.delegate = self
         contentView.showsVerticalScrollIndicator = false
         
-        contentView.layer.addSublayer(snow)
         view.addSubview(contentView)
         
         renderContentView()
         
-        motionManager = CMMotionManager()
-        
-        motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue()) { (deviceMotion, error) -> Void in
-            guard let deviceMotion = deviceMotion else {
-                return
-            }
+        if environment.precipitationType != .None {
+            precipitation = PrecipitationLayer()
+            precipitation.precipitationType = environment.precipitationType
+            contentView.layer.addSublayer(precipitation)
             
-            self.snow.updateTilt(CGFloat(deviceMotion.attitude.yaw))
+            motionManager = CMMotionManager()
+            
+            motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue()) { (deviceMotion, error) -> Void in
+                guard let deviceMotion = deviceMotion else {
+                    return
+                }
+                
+                self.precipitation.updateTilt(CGFloat(deviceMotion.attitude.yaw))
+            }
         }
     }
     
@@ -56,7 +61,10 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLayoutSubviews()
         
         landscape.frame = view.bounds
-        snow.frame = view.bounds
+        
+        if let _ = precipitation {
+            precipitation.frame = view.bounds
+        }
         
         contentView.frame = view.bounds
         

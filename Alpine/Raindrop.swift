@@ -1,5 +1,5 @@
 //
-//  Snowflake.swift
+//  Raindrop.swift
 //  Alpine
 //
 //  Created by Jack Cook on 1/23/16.
@@ -9,27 +9,24 @@
 import QuartzCore
 import UIKit
 
-class Snowflake: Precipitation {
+class Raindrop: Precipitation {
     
     override init() {
         super.init()
         
-        let color = UIColor.cyan50()
+        let color = UIColor.indigo500()
         
         let width: CGFloat = 4
         let x = CGFloat(arc4random_uniform(UInt32(bounds.width)))
         
         frame = CGRectMake(x, 0, width, width)
         
-        let path = UIBezierPath()
-        path.moveToPoint(CGPointMake(frame.width / 2, 0))
-        path.addLineToPoint(CGPointMake(frame.width, frame.height / 2))
-        path.addLineToPoint(CGPointMake(frame.width / 2, frame.height))
-        path.addLineToPoint(CGPointMake(0, frame.height / 2))
-        path.closePath()
+        let path = UIBezierPath(ovalInRect: frame)
         
         fillColor = color.CGColor
         self.path = path.CGPath
+        
+        fallSpeed = 5.0
     }
     
     required init?(coder aDecoder: NSCoder) {

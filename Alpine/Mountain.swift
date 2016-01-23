@@ -14,10 +14,11 @@ class Mountain: CAShapeLayer {
     // MARK: Properties
     
     private var background = false
+    private var environment: Environment!
     
     private var color: UIColor {
         get {
-            return background ? UIColor.cyan150() : UIColor.cyan300()
+            return background ? environment.distantMountainColor : environment.nearMountainColor
         }
     }
     
@@ -47,10 +48,11 @@ class Mountain: CAShapeLayer {
     
     // MARK: Initializers
     
-    init(background bg: Bool) {
+    init(background bg: Bool, environment env: Environment) {
         super.init()
         
         background = bg
+        environment = env
         
         let width = CGFloat(arc4random_uniform(UInt32(maxWidth - minWidth))) + minWidth
         let height = CGFloat(arc4random_uniform(UInt32(maxHeight - minHeight))) + minHeight

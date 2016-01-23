@@ -13,18 +13,7 @@ class LandscapeLayer: CALayer {
     
     // MARK: Properties
     
-    private var skyColor: UIColor? {
-        get {
-            if let backgroundColor = backgroundColor {
-                return UIColor(CGColor: backgroundColor)
-            }
-            
-            return nil
-        }
-        set(newValue) {
-            backgroundColor = newValue!.CGColor
-        }
-    }
+    private var environment: Environment!
     
     private var distantMountains: CALayer!
     private var nearMountains: CALayer!
@@ -32,10 +21,12 @@ class LandscapeLayer: CALayer {
     
     private let fullHeight: CGFloat = 2000
     
-    override init() {
+    init(environment env: Environment) {
         super.init()
         
-        skyColor = UIColor.cyan100()
+        environment = env
+        
+        backgroundColor = environment.skyColor.CGColor
         
         distantMountains = CALayer()
         addSublayer(distantMountains)
@@ -76,7 +67,7 @@ class LandscapeLayer: CALayer {
     
     private func renderDistantHills() {
         let bounds = UIScreen.mainScreen().bounds
-        let color = UIColor.cyan150()
+        let color = environment.distantMountainColor
         
         let minDistance: CGFloat = 30
         let maxDistance: CGFloat = 45
@@ -85,7 +76,7 @@ class LandscapeLayer: CALayer {
         
         var x: CGFloat = -72 / 2
         while x < bounds.width {
-            let mountain = Mountain(background: true)
+            let mountain = Mountain(background: true, environment: environment)
             mountain.frame = CGRectMake(x, baseY - mountain.bounds.height, mountain.bounds.width, mountain.bounds.height)
             
             let distance = CGFloat(arc4random_uniform(UInt32(maxDistance - minDistance))) + minDistance
@@ -102,7 +93,7 @@ class LandscapeLayer: CALayer {
     
     private func renderForegroundHills() {
         let bounds = UIScreen.mainScreen().bounds
-        let color = UIColor.cyan300()
+        let color = environment.nearMountainColor
         
         let baseY: CGFloat = 464
         let minDistance: CGFloat = 40
@@ -110,7 +101,7 @@ class LandscapeLayer: CALayer {
         
         var x: CGFloat = -144 / 3
         while x < bounds.width {
-            let mountain = Mountain(background: false)
+            let mountain = Mountain(background: false, environment: environment)
             mountain.frame = CGRectMake(x, baseY - mountain.bounds.height, mountain.bounds.width, mountain.bounds.height)
             
             let distance = CGFloat(arc4random_uniform(UInt32(maxDistance - minDistance))) + minDistance
@@ -127,7 +118,7 @@ class LandscapeLayer: CALayer {
     
     private func renderSuperForegroundHills() {
         let bounds = UIScreen.mainScreen().bounds
-        let color = UIColor.cyan50()
+        let color = environment.hillColor
         
         let hill = Hill()
         hill.frame = CGRectMake(0, 500, bounds.width, 100)

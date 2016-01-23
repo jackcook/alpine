@@ -9,11 +9,15 @@
 /* Begin PBXBuildFile section */
 		EB13C9231C53172E00F33EFA /* LandscapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13C9221C53172E00F33EFA /* LandscapeLayer.swift */; };
 		EB13C9251C53189600F33EFA /* MaterialColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13C9241C53189600F33EFA /* MaterialColors.swift */; };
-		EB13C9271C53438200F33EFA /* SnowLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13C9261C53438200F33EFA /* SnowLayer.swift */; };
+		EB13C9271C53438200F33EFA /* PrecipitationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13C9261C53438200F33EFA /* PrecipitationLayer.swift */; };
 		EB13C9291C534BE900F33EFA /* Snowflake.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13C9281C534BE900F33EFA /* Snowflake.swift */; };
 		EBC7389C1C53664100ABE1DB /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC7389B1C53664100ABE1DB /* Tree.swift */; };
 		EBC738A01C536F7200ABE1DB /* Mountain.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC7389F1C536F7200ABE1DB /* Mountain.swift */; };
 		EBC738A21C53769100ABE1DB /* Hill.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC738A11C53769100ABE1DB /* Hill.swift */; };
+		EBC738A41C537D4E00ABE1DB /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC738A31C537D4E00ABE1DB /* Environment.swift */; };
+		EBC738A61C53807100ABE1DB /* Raindrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC738A51C53807100ABE1DB /* Raindrop.swift */; };
+		EBC738A81C53816800ABE1DB /* Precipitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC738A71C53816800ABE1DB /* Precipitation.swift */; };
+		EBC738AA1C53C92000ABE1DB /* PrecipitationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC738A91C53C92000ABE1DB /* PrecipitationType.swift */; };
 		EBC80F8B1C530059005CA81E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC80F8A1C530059005CA81E /* AppDelegate.swift */; };
 		EBC80F8D1C530059005CA81E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC80F8C1C530059005CA81E /* ViewController.swift */; };
 		EBC80F901C530059005CA81E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBC80F8E1C530059005CA81E /* Main.storyboard */; };
@@ -24,11 +28,15 @@
 /* Begin PBXFileReference section */
 		EB13C9221C53172E00F33EFA /* LandscapeLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandscapeLayer.swift; sourceTree = "<group>"; };
 		EB13C9241C53189600F33EFA /* MaterialColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialColors.swift; sourceTree = "<group>"; };
-		EB13C9261C53438200F33EFA /* SnowLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnowLayer.swift; sourceTree = "<group>"; };
+		EB13C9261C53438200F33EFA /* PrecipitationLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecipitationLayer.swift; sourceTree = "<group>"; };
 		EB13C9281C534BE900F33EFA /* Snowflake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snowflake.swift; sourceTree = "<group>"; };
 		EBC7389B1C53664100ABE1DB /* Tree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		EBC7389F1C536F7200ABE1DB /* Mountain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mountain.swift; sourceTree = "<group>"; };
 		EBC738A11C53769100ABE1DB /* Hill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hill.swift; sourceTree = "<group>"; };
+		EBC738A31C537D4E00ABE1DB /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		EBC738A51C53807100ABE1DB /* Raindrop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Raindrop.swift; sourceTree = "<group>"; };
+		EBC738A71C53816800ABE1DB /* Precipitation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Precipitation.swift; sourceTree = "<group>"; };
+		EBC738A91C53C92000ABE1DB /* PrecipitationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecipitationType.swift; sourceTree = "<group>"; };
 		EBC80F871C530059005CA81E /* Alpine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alpine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBC80F8A1C530059005CA81E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBC80F8C1C530059005CA81E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -75,12 +83,16 @@
 				EBC80F931C530059005CA81E /* LaunchScreen.storyboard */,
 				EBC80F961C530059005CA81E /* Info.plist */,
 				EB13C9221C53172E00F33EFA /* LandscapeLayer.swift */,
-				EB13C9261C53438200F33EFA /* SnowLayer.swift */,
+				EB13C9261C53438200F33EFA /* PrecipitationLayer.swift */,
 				EB13C9281C534BE900F33EFA /* Snowflake.swift */,
+				EBC738A71C53816800ABE1DB /* Precipitation.swift */,
+				EBC738A51C53807100ABE1DB /* Raindrop.swift */,
 				EBC7389B1C53664100ABE1DB /* Tree.swift */,
 				EBC7389F1C536F7200ABE1DB /* Mountain.swift */,
 				EBC738A11C53769100ABE1DB /* Hill.swift */,
 				EB13C9241C53189600F33EFA /* MaterialColors.swift */,
+				EBC738A31C537D4E00ABE1DB /* Environment.swift */,
+				EBC738A91C53C92000ABE1DB /* PrecipitationType.swift */,
 			);
 			path = Alpine;
 			sourceTree = "<group>";
@@ -158,14 +170,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBC7389C1C53664100ABE1DB /* Tree.swift in Sources */,
+				EBC738AA1C53C92000ABE1DB /* PrecipitationType.swift in Sources */,
 				EB13C9291C534BE900F33EFA /* Snowflake.swift in Sources */,
-				EB13C9271C53438200F33EFA /* SnowLayer.swift in Sources */,
+				EB13C9271C53438200F33EFA /* PrecipitationLayer.swift in Sources */,
+				EBC738A61C53807100ABE1DB /* Raindrop.swift in Sources */,
 				EB13C9251C53189600F33EFA /* MaterialColors.swift in Sources */,
+				EBC738A81C53816800ABE1DB /* Precipitation.swift in Sources */,
 				EBC738A01C536F7200ABE1DB /* Mountain.swift in Sources */,
 				EBC80F8D1C530059005CA81E /* ViewController.swift in Sources */,
 				EBC738A21C53769100ABE1DB /* Hill.swift in Sources */,
 				EBC80F8B1C530059005CA81E /* AppDelegate.swift in Sources */,
 				EB13C9231C53172E00F33EFA /* LandscapeLayer.swift in Sources */,
+				EBC738A41C537D4E00ABE1DB /* Environment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
