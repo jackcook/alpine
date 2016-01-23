@@ -6,6 +6,7 @@
 //  Copyright © 2016 Jack Cook. All rights reserved.
 //
 
+import MaterialColors
 import QuartzCore
 import UIKit
 
@@ -14,7 +15,7 @@ class Raindrop: Precipitation {
     override init() {
         super.init()
         
-        let color = UIColor.indigo500()
+        let color = MaterialColors.Indigo.P500.color
         
         let width: CGFloat = 4
         let x = CGFloat(arc4random_uniform(UInt32(bounds.width)))

@@ -7,7 +7,7 @@
 //
 
 enum PrecipitationType {
-    case None
+    case Nothing
     case Rain
     case Snow
 }

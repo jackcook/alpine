@@ -28,8 +28,9 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         
         var environment = Environment()
-        environment.season = .Summer
-        environment.precipitationType = .None
+        environment.season = .Fall
+        environment.precipitationType = .Nothing
+        environment.time = .Night
         
         landscape = LandscapeLayer(environment: environment)
         view.layer.addSublayer(landscape)

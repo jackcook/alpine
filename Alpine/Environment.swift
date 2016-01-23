@@ -6,15 +6,15 @@
 //  Copyright © 2016 Jack Cook. All rights reserved.
 //
 
+import MaterialColors
 import UIKit
 
 struct Environment {
     
-    var time: Time!
+    var time: Time?
     
     enum Time {
         case Day
-        case Dusk
         case Night
     }
     
@@ -29,65 +29,125 @@ struct Environment {
     
     var skyColor: UIColor {
         get {
+            switch time! {
+            case .Night:
+                return MaterialColors.BlueGrey.P800.color
+            default:
+                break
+            }
+            
             switch season! {
-            case .Spring:
-                return UIColor.cyan100()
-            case .Summer:
-                return UIColor.orange100()
-            case .Fall:
-                return UIColor.cyan100()
             case .Winter:
-                return UIColor.cyan50()
+                return MaterialColors.Cyan.P50.color
+            default:
+                return MaterialColors.Cyan.P100.color
             }
         }
     }
     
     var distantMountainColor: UIColor {
         get {
+            switch time! {
+            case .Night:
+                switch season! {
+                case .Spring:
+                    return MaterialColors.Green.P800.color
+                case .Summer:
+                    return MaterialColors.Cyan.P900.color
+                case .Fall:
+                    return UIColor(red: 37/255, green: 10/255, blue: 70/255, alpha: 1)
+                case .Winter:
+                    return MaterialColors.Cyan.P900.color
+                default:
+                    break
+                }
+            default:
+                break
+            }
+            
             switch season! {
             case .Spring:
-                return UIColor.green150()
+                return MaterialColors.Green.P100.color
             case .Summer:
-                return UIColor.orange150()
+                return MaterialColors.Blue.P700.color
             case .Fall:
-                return UIColor.orange300()
+                return MaterialColors.Orange.P300.color
             case .Winter:
-                return UIColor.cyan150()
+                return UIColor(red: 153/255, green: 228/255, blue: 238/255, alpha: 1)
             }
         }
     }
     
     var nearMountainColor: UIColor {
         get {
+            switch time! {
+            case .Night:
+                switch season! {
+                case .Spring:
+                    return MaterialColors.Green.P700.color
+                case .Summer:
+                    return MaterialColors.Teal.P900.color
+                case .Fall:
+                    return MaterialColors.Pink.P900.color
+                case .Winter:
+                    return MaterialColors.Cyan.P700.color
+                }
+            default:
+                break
+            }
+            
             switch season! {
             case .Spring:
-                return UIColor.green300()
+                return MaterialColors.Green.P300.color
             case .Summer:
-                return UIColor.orange300()
+                return MaterialColors.Cyan.P900.color
             case .Fall:
-                return UIColor.orange600()
+                return MaterialColors.Orange.P600.color
             case .Winter:
-                return UIColor.cyan300()
+                return MaterialColors.Cyan.P300.color
             }
         }
     }
     
     var hillColor: UIColor {
         get {
+            switch precipitationType! {
+            case .Snow:
+                return MaterialColors.Cyan.P50.color
+            default:
+                break
+            }
+            
+            switch time! {
+            case .Night:
+                switch season! {
+                case .Spring:
+                    return MaterialColors.Green.P500.color
+                case .Summer:
+                    return MaterialColors.LightGreen.P900.color
+                case .Fall:
+                    return MaterialColors.DeepOrange.P900.color
+                case .Winter:
+                    return MaterialColors.BlueGrey.P600.color
+                }
+            default:
+                break
+            }
+            
             switch season! {
             case .Spring:
-                return UIColor.green500()
+                return MaterialColors.Green.P600.color
             case .Summer:
-                return UIColor.orange100()
+                return MaterialColors.LightGreen.P800.color
             case .Fall:
-                return UIColor.orange800()
+                return MaterialColors.Orange.P800.color
             case .Winter:
-                return UIColor.cyan50()
+                return MaterialColors.BlueGrey.P700.color
             }
         }
     }
     
-    var precipitationType = PrecipitationType.None
+    var precipitationType: PrecipitationType?
     
 //    static func forestDaytime() -> Environment {
 //        return Environment(time: .Day, skyColor: UIColor.green50(), distantMountainColor: UIColor.green150(), nearMountainColor: UIColor.green300(), hillColor: UIColor.green500(), precipitationType: .None)

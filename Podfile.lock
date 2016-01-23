@@ -1,0 +1,10 @@
+PODS:
+  - MaterialColors (1.0.0)
+
+DEPENDENCIES:
+  - MaterialColors (~> 1.0)
+
+SPEC CHECKSUMS:
+  MaterialColors: 292c4fe58649bddeb91d4121488312c7e5d54009
+
+COCOAPODS: 0.39.0

@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3346C391DB77CFBF7A537D92 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF77176ED0BDD3C1A42B73A /* Pods.framework */; };
 		EB13C9231C53172E00F33EFA /* LandscapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13C9221C53172E00F33EFA /* LandscapeLayer.swift */; };
-		EB13C9251C53189600F33EFA /* MaterialColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13C9241C53189600F33EFA /* MaterialColors.swift */; };
 		EB13C9271C53438200F33EFA /* PrecipitationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13C9261C53438200F33EFA /* PrecipitationLayer.swift */; };
 		EB13C9291C534BE900F33EFA /* Snowflake.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13C9281C534BE900F33EFA /* Snowflake.swift */; };
+		EB37C9FC1C53FAF000D99617 /* Colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB37C9FB1C53FAF000D99617 /* Colors.plist */; };
 		EBC7389C1C53664100ABE1DB /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC7389B1C53664100ABE1DB /* Tree.swift */; };
 		EBC738A01C536F7200ABE1DB /* Mountain.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC7389F1C536F7200ABE1DB /* Mountain.swift */; };
 		EBC738A21C53769100ABE1DB /* Hill.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC738A11C53769100ABE1DB /* Hill.swift */; };
@@ -26,10 +27,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1195BECE0C394B6C5D45D94C /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		3AF77176ED0BDD3C1A42B73A /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		79C58FE60D17458BC1B224CD /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EB13C9221C53172E00F33EFA /* LandscapeLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandscapeLayer.swift; sourceTree = "<group>"; };
-		EB13C9241C53189600F33EFA /* MaterialColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialColors.swift; sourceTree = "<group>"; };
 		EB13C9261C53438200F33EFA /* PrecipitationLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecipitationLayer.swift; sourceTree = "<group>"; };
 		EB13C9281C534BE900F33EFA /* Snowflake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snowflake.swift; sourceTree = "<group>"; };
+		EB37C9FB1C53FAF000D99617 /* Colors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Colors.plist; sourceTree = "<group>"; };
 		EBC7389B1C53664100ABE1DB /* Tree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		EBC7389F1C536F7200ABE1DB /* Mountain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mountain.swift; sourceTree = "<group>"; };
 		EBC738A11C53769100ABE1DB /* Hill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hill.swift; sourceTree = "<group>"; };
@@ -51,17 +55,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3346C391DB77CFBF7A537D92 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A757889F6C7920FD04F66CE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				79C58FE60D17458BC1B224CD /* Pods.debug.xcconfig */,
+				1195BECE0C394B6C5D45D94C /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		EBC80F7E1C530059005CA81E = {
 			isa = PBXGroup;
 			children = (
 				EBC80F891C530059005CA81E /* Alpine */,
 				EBC80F881C530059005CA81E /* Products */,
+				7A757889F6C7920FD04F66CE /* Pods */,
+				F7054197A082E896DAF18D90 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,11 +106,19 @@
 				EBC7389B1C53664100ABE1DB /* Tree.swift */,
 				EBC7389F1C536F7200ABE1DB /* Mountain.swift */,
 				EBC738A11C53769100ABE1DB /* Hill.swift */,
-				EB13C9241C53189600F33EFA /* MaterialColors.swift */,
 				EBC738A31C537D4E00ABE1DB /* Environment.swift */,
+				EB37C9FB1C53FAF000D99617 /* Colors.plist */,
 				EBC738A91C53C92000ABE1DB /* PrecipitationType.swift */,
 			);
 			path = Alpine;
+			sourceTree = "<group>";
+		};
+		F7054197A082E896DAF18D90 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3AF77176ED0BDD3C1A42B73A /* Pods.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -104,9 +128,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = EBC80F991C530059005CA81E /* Build configuration list for PBXNativeTarget "Alpine" */;
 			buildPhases = (
+				A831D4EAA77632F952E8B644 /* Check Pods Manifest.lock */,
 				EBC80F831C530059005CA81E /* Sources */,
 				EBC80F841C530059005CA81E /* Frameworks */,
 				EBC80F851C530059005CA81E /* Resources */,
+				5B25378D6ED5F4B22B3FA0A0 /* Embed Pods Frameworks */,
+				ECBD14F483232CB37784A1DE /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -156,6 +183,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB37C9FC1C53FAF000D99617 /* Colors.plist in Resources */,
 				EBC80F951C530059005CA81E /* LaunchScreen.storyboard in Resources */,
 				EBC80F921C530059005CA81E /* Assets.xcassets in Resources */,
 				EBC80F901C530059005CA81E /* Main.storyboard in Resources */,
@@ -163,6 +191,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5B25378D6ED5F4B22B3FA0A0 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A831D4EAA77632F952E8B644 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		ECBD14F483232CB37784A1DE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EBC80F831C530059005CA81E /* Sources */ = {
@@ -174,7 +250,6 @@
 				EB13C9291C534BE900F33EFA /* Snowflake.swift in Sources */,
 				EB13C9271C53438200F33EFA /* PrecipitationLayer.swift in Sources */,
 				EBC738A61C53807100ABE1DB /* Raindrop.swift in Sources */,
-				EB13C9251C53189600F33EFA /* MaterialColors.swift in Sources */,
 				EBC738A81C53816800ABE1DB /* Precipitation.swift in Sources */,
 				EBC738A01C536F7200ABE1DB /* Mountain.swift in Sources */,
 				EBC80F8D1C530059005CA81E /* ViewController.swift in Sources */,
@@ -292,6 +367,7 @@
 		};
 		EBC80F9A1C530059005CA81E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 79C58FE60D17458BC1B224CD /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -304,6 +380,7 @@
 		};
 		EBC80F9B1C530059005CA81E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1195BECE0C394B6C5D45D94C /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
