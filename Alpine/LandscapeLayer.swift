@@ -30,6 +30,8 @@ class LandscapeLayer: CALayer {
     private var foregroundHills: CALayer!
     private var superForegroundHills: CALayer!
     
+    private let fullHeight: CGFloat = 2000
+    
     override init() {
         super.init()
         
@@ -55,12 +57,19 @@ class LandscapeLayer: CALayer {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: Layer Life Cycle
+    // MARK: Public Methods
     
-    override func layoutSublayers() {
-        super.layoutSublayers()
+    func adjustForParallax(offset: CGFloat) {
+        let bounds = UIScreen.mainScreen().bounds
         
-        distantHills.frame = bounds
+        CATransaction.begin()
+        CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
+        
+        distantHills.frame = CGRectMake(0, -offset / 3, bounds.width, fullHeight)
+        foregroundHills.frame = CGRectMake(0, -offset / 2, bounds.width, fullHeight)
+        superForegroundHills.frame = CGRectMake(0, -offset / 1, bounds.width, fullHeight)
+        
+        CATransaction.commit()
     }
     
     // MARK: Private Methods
@@ -99,7 +108,7 @@ class LandscapeLayer: CALayer {
         
         let fillLayer = CALayer()
         fillLayer.backgroundColor = color.CGColor
-        fillLayer.frame = CGRectMake(0, baseY, bounds.width, bounds.height - baseY)
+        fillLayer.frame = CGRectMake(0, baseY, bounds.width, fullHeight - baseY)
         distantHills.addSublayer(fillLayer)
     }
     
@@ -107,7 +116,7 @@ class LandscapeLayer: CALayer {
         let bounds = UIScreen.mainScreen().bounds
         let color = UIColor.cyan300()
         
-        let baseY: CGFloat = 432
+        let baseY: CGFloat = 464
         let minWidth: CGFloat = 144
         let maxWidth: CGFloat = 344
         let minHeight: CGFloat = 192
@@ -139,15 +148,15 @@ class LandscapeLayer: CALayer {
         
         let fillLayer = CALayer()
         fillLayer.backgroundColor = color.CGColor
-        fillLayer.frame = CGRectMake(0, baseY, bounds.width, bounds.height - baseY)
+        fillLayer.frame = CGRectMake(0, baseY, bounds.width, fullHeight - baseY)
         foregroundHills.addSublayer(fillLayer)
     }
     
     private func renderSuperForegroundHills() {
         let bounds = UIScreen.mainScreen().bounds
-        let color = UIColor(white: 1, alpha: 0.9)
+        let color = UIColor.cyan50()
         
-        let baseY: CGFloat = 462
+        let baseY: CGFloat = 500
         let minVariance: CGFloat = 22.5
         let maxVariance: CGFloat = 25
         
@@ -166,8 +175,8 @@ class LandscapeLayer: CALayer {
             x += 1
         }
         
-        path.addLineToPoint(CGPointMake(baseY, bounds.height))
-        path.addLineToPoint(CGPointMake(0, bounds.height))
+        path.addLineToPoint(CGPointMake(bounds.width, fullHeight))
+        path.addLineToPoint(CGPointMake(0, fullHeight))
         
         path.closePath()
         

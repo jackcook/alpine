@@ -10,6 +10,10 @@ import UIKit
 
 public extension UIColor {
     
+    public static func cyan50() -> UIColor {
+        return UIColor(red: 224/255, green: 247/255, blue: 250/255, alpha: 1)
+    }
+    
     public static func cyan100() -> UIColor {
         return UIColor(red: 178/255, green: 235/255, blue: 242/255, alpha: 1)
     }
