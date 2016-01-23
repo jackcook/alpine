@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB13C9231C53172E00F33EFA /* LandscapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13C9221C53172E00F33EFA /* LandscapeLayer.swift */; };
+		EB13C9251C53189600F33EFA /* MaterialColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13C9241C53189600F33EFA /* MaterialColors.swift */; };
 		EBC80F8B1C530059005CA81E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC80F8A1C530059005CA81E /* AppDelegate.swift */; };
 		EBC80F8D1C530059005CA81E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC80F8C1C530059005CA81E /* ViewController.swift */; };
 		EBC80F901C530059005CA81E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBC80F8E1C530059005CA81E /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EB13C9221C53172E00F33EFA /* LandscapeLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandscapeLayer.swift; sourceTree = "<group>"; };
+		EB13C9241C53189600F33EFA /* MaterialColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialColors.swift; sourceTree = "<group>"; };
 		EBC80F871C530059005CA81E /* Alpine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Alpine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBC80F8A1C530059005CA81E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EBC80F8C1C530059005CA81E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 				EBC80F911C530059005CA81E /* Assets.xcassets */,
 				EBC80F931C530059005CA81E /* LaunchScreen.storyboard */,
 				EBC80F961C530059005CA81E /* Info.plist */,
+				EB13C9221C53172E00F33EFA /* LandscapeLayer.swift */,
+				EB13C9241C53189600F33EFA /* MaterialColors.swift */,
 			);
 			path = Alpine;
 			sourceTree = "<group>";
@@ -96,6 +102,7 @@
 				TargetAttributes = {
 					EBC80F861C530059005CA81E = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = JDJKS788L2;
 					};
 				};
 			};
@@ -135,8 +142,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB13C9251C53189600F33EFA /* MaterialColors.swift in Sources */,
 				EBC80F8D1C530059005CA81E /* ViewController.swift in Sources */,
 				EBC80F8B1C530059005CA81E /* AppDelegate.swift in Sources */,
+				EB13C9231C53172E00F33EFA /* LandscapeLayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,6 +258,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Alpine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nyc.jackcook.Alpine;
@@ -260,6 +270,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = Alpine/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = nyc.jackcook.Alpine;
@@ -286,6 +297,7 @@
 				EBC80F9B1C530059005CA81E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
