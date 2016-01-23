@@ -13,15 +13,17 @@ class Hill: CAShapeLayer {
     
     // MARK: Properties
     
-    private var color = UIColor.cyan50()
+    private var environment: Environment!
     
     private let minVariance: CGFloat = 22.5
     private let maxVariance: CGFloat = 25
     
     // MARK: Initializers
     
-    override init() {
+    init(environment env: Environment) {
         super.init()
+        
+        environment = env
         
         let a = CGFloat(arc4random_uniform(75)) / 50 + 0.5
         let b = CGFloat(arc4random_uniform(75)) / 50 + 0.5
@@ -34,7 +36,6 @@ class Hill: CAShapeLayer {
         
         var x: CGFloat = 0
         while x < UIScreen.mainScreen().bounds.width {
-            print(getCurve(a, b, c, v, x) * 10)
             path.addLineToPoint(CGPointMake(x, getCurve(a, b, c, v, x) * 10))
             x += 1
         }
@@ -42,7 +43,7 @@ class Hill: CAShapeLayer {
         path.addLineToPoint(CGPointMake(UIScreen.mainScreen().bounds.width, 100))
         path.closePath()
         
-        fillColor = color.CGColor
+        fillColor = environment.hillColor.CGColor
         self.path = path.CGPath
         
         bounds = CGRectMake(0, 0, UIScreen.mainScreen().bounds.width, 2000)
@@ -55,6 +56,8 @@ class Hill: CAShapeLayer {
     // MARK: Private Methods
     
     private func getCurve(a: CGFloat, _ b: CGFloat, _ c: CGFloat, _ v: CGFloat, _ x: CGFloat) -> CGFloat {
-        return sin(a * x / 25) + sin(b * x / 25) + sin(c * x / 25)
+        let variance: CGFloat = environment.precipitationType == .Snow ? 25 : 75
+        
+        return sin(a * x / variance) + sin(b * x / variance) + sin(c * x / variance)
     }
 }

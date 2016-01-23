@@ -25,7 +25,7 @@ struct Environment {
     var precipitationType: PrecipitationType
     
     static func forestDaytime() -> Environment {
-        return Environment(time: .Day, skyColor: UIColor.teal100(), distantMountainColor: UIColor.teal150(), nearMountainColor: UIColor.teal300(), hillColor: UIColor.teal50(), precipitationType: .Snow)
+        return Environment(time: .Day, skyColor: UIColor.green50(), distantMountainColor: UIColor.green150(), nearMountainColor: UIColor.green300(), hillColor: UIColor.green500(), precipitationType: .None)
     }
     
     static func snowDaytime() -> Environment {

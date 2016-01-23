@@ -95,19 +95,25 @@ class LandscapeLayer: CALayer {
         let bounds = UIScreen.mainScreen().bounds
         let color = environment.nearMountainColor
         
-        let baseY: CGFloat = 464
+        let baseY: CGFloat = 400
         let minDistance: CGFloat = 40
         let maxDistance: CGFloat = 60
         
         var x: CGFloat = -144 / 3
         while x < bounds.width {
             let mountain = Mountain(background: false, environment: environment)
+            mountain.masksToBounds = false
             mountain.frame = CGRectMake(x, baseY - mountain.bounds.height, mountain.bounds.width, mountain.bounds.height)
             
             let distance = CGFloat(arc4random_uniform(UInt32(maxDistance - minDistance))) + minDistance
             x += mountain.bounds.width * distance / 100
             
             nearMountains.addSublayer(mountain)
+            
+            for _ in 0...5 {
+                let tree = Tree(mountain: mountain)
+                mountain.addSublayer(tree)
+            }
         }
         
         let fillLayer = CALayer()
@@ -120,7 +126,7 @@ class LandscapeLayer: CALayer {
         let bounds = UIScreen.mainScreen().bounds
         let color = environment.hillColor
         
-        let hill = Hill()
+        let hill = Hill(environment: environment)
         hill.frame = CGRectMake(0, 500, bounds.width, 100)
         
         let fillLayer = CALayer()

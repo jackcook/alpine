@@ -60,6 +60,36 @@ public extension UIColor {
         return UIColor(red: 77/255, green: 182/255, blue: 172/255, alpha: 1)
     }
     
+    // MARK: Green
+    
+    public static func green50() -> UIColor {
+        return UIColor(red: 232/255, green: 245/255, blue: 233/255, alpha: 1)
+    }
+    
+    public static func green100() -> UIColor {
+        return UIColor(red: 200/255, green: 230/255, blue: 201/255, alpha: 1)
+    }
+    
+    public static func green150() -> UIColor {
+        return UIColor(red: 183/255, green: 222/255, blue: 184/255, alpha: 1)
+    }
+    
+    public static func green200() -> UIColor {
+        return UIColor(red: 165/255, green: 214/255, blue: 167/255, alpha: 1)
+    }
+    
+    public static func green300() -> UIColor {
+        return UIColor(red: 129/255, green: 199/255, blue: 132/255, alpha: 1)
+    }
+    
+    public static func green500() -> UIColor {
+        return UIColor(red: 76/255, green: 175/255, blue: 80/255, alpha: 1)
+    }
+    
+    public static func green900() -> UIColor {
+        return UIColor(red: 27/255, green: 94/255, blue: 32/255, alpha: 1)
+    }
+    
     // MARK: Light Green
     
     public static func lightGreen500() -> UIColor {
