@@ -7,6 +7,7 @@
 //
 
 import CoreMotion
+import MaterialColors
 import UIKit
 
 class ViewController: UIViewController, UIScrollViewDelegate {
@@ -16,10 +17,10 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     private var landscape: LandscapeLayer!
     private var precipitation: PrecipitationLayer!
     
-    private var contentView: UIScrollView!
-    private var locationLabel: UILabel!
-    private var temperatureLabel: UILabel!
+    private var statusBarView: UIView!
+    private var contentView: ContentView!
     
+    private var locationManager: LocationManager!
     private var motionManager: CMMotionManager!
     
     // MARK: View Life Cycle
@@ -28,20 +29,21 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         
         var environment = Environment()
-        environment.season = .Fall
-        environment.precipitationType = .Nothing
-        environment.time = .Night
+        environment.season = .Winter
+        environment.precipitationType = .Snow
+        environment.time = .Day
         
         landscape = LandscapeLayer(environment: environment)
         view.layer.addSublayer(landscape)
         
-        contentView = UIScrollView()
+        statusBarView = UIView(frame: CGRectMake(0, 0, view.bounds.width, 20))
+        statusBarView.backgroundColor = environment.distantMountainColor
+        
+        contentView = ContentView()
         contentView.delegate = self
-        contentView.showsVerticalScrollIndicator = false
         
         view.addSubview(contentView)
-        
-        renderContentView()
+        view.addSubview(statusBarView)
         
         if environment.precipitationType != .None {
             precipitation = PrecipitationLayer()
@@ -58,6 +60,8 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                 self.precipitation.updateTilt(CGFloat(deviceMotion.attitude.yaw))
             }
         }
+        
+        LocationManager.sharedManager.startLocationUpdates()
     }
     
     override func viewDidLayoutSubviews() {
@@ -70,34 +74,10 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         }
         
         contentView.frame = view.bounds
-        
-        locationLabel.sizeToFit()
-        locationLabel.frame = CGRectMake((contentView.frame.size.width - locationLabel.frame.size.width) / 2, 36, locationLabel.frame.size.width, locationLabel.frame.size.height)
-        
-        temperatureLabel.sizeToFit()
-        temperatureLabel.frame = CGRectMake((view.bounds.size.width - temperatureLabel.frame.size.width) / 2, (view.bounds.size.height - temperatureLabel.frame.size.height) / 2, temperatureLabel.frame.size.width, temperatureLabel.frame.size.height)
-        
-        contentView.contentSize = CGSizeMake(view.bounds.width, 2000)
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
-    }
-    
-    // MARK: Private Methods
-    
-    private func renderContentView() {
-        locationLabel = UILabel()
-        locationLabel.font = UIFont.systemFontOfSize(18, weight: UIFontWeightMedium)
-        locationLabel.text = "Philadelphia"
-        locationLabel.textColor = UIColor.whiteColor()
-        contentView.addSubview(locationLabel)
-        
-        temperatureLabel = UILabel()
-        temperatureLabel.font = UIFont.systemFontOfSize(96, weight: UIFontWeightRegular)
-        temperatureLabel.text = "25°"
-        temperatureLabel.textColor = UIColor.whiteColor()
-        contentView.addSubview(temperatureLabel)
     }
     
     // MARK: UIScrollViewDelegate Methods

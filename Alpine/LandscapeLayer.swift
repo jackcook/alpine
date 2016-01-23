@@ -28,7 +28,9 @@ class LandscapeLayer: CALayer {
         
         backgroundColor = environment.skyColor.CGColor
         
-        renderStars()
+        if environment.time == .Night {
+            renderStars()
+        }
         
         distantMountains = CALayer()
         addSublayer(distantMountains)
@@ -119,7 +121,7 @@ class LandscapeLayer: CALayer {
             
             nearMountains.addSublayer(mountain)
             
-            for _ in 0...5 {
+            for _ in 0...10 {
                 let tree = Tree(mountain: mountain)
                 mountain.addSublayer(tree)
             }

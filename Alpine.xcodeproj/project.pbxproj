@@ -11,8 +11,9 @@
 		EB13C9231C53172E00F33EFA /* LandscapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13C9221C53172E00F33EFA /* LandscapeLayer.swift */; };
 		EB13C9271C53438200F33EFA /* PrecipitationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13C9261C53438200F33EFA /* PrecipitationLayer.swift */; };
 		EB13C9291C534BE900F33EFA /* Snowflake.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB13C9281C534BE900F33EFA /* Snowflake.swift */; };
-		EB37C9FC1C53FAF000D99617 /* Colors.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB37C9FB1C53FAF000D99617 /* Colors.plist */; };
 		EB37C9FE1C540C2200D99617 /* Star.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB37C9FD1C540C2200D99617 /* Star.swift */; };
+		EB37CA001C54147900D99617 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB37C9FF1C54147900D99617 /* ContentView.swift */; };
+		EB37CA021C54175800D99617 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB37CA011C54175800D99617 /* LocationManager.swift */; };
 		EBC7389C1C53664100ABE1DB /* Tree.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC7389B1C53664100ABE1DB /* Tree.swift */; };
 		EBC738A01C536F7200ABE1DB /* Mountain.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC7389F1C536F7200ABE1DB /* Mountain.swift */; };
 		EBC738A21C53769100ABE1DB /* Hill.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC738A11C53769100ABE1DB /* Hill.swift */; };
@@ -34,8 +35,9 @@
 		EB13C9221C53172E00F33EFA /* LandscapeLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandscapeLayer.swift; sourceTree = "<group>"; };
 		EB13C9261C53438200F33EFA /* PrecipitationLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrecipitationLayer.swift; sourceTree = "<group>"; };
 		EB13C9281C534BE900F33EFA /* Snowflake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snowflake.swift; sourceTree = "<group>"; };
-		EB37C9FB1C53FAF000D99617 /* Colors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Colors.plist; sourceTree = "<group>"; };
 		EB37C9FD1C540C2200D99617 /* Star.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Star.swift; sourceTree = "<group>"; };
+		EB37C9FF1C54147900D99617 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EB37CA011C54175800D99617 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		EBC7389B1C53664100ABE1DB /* Tree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tree.swift; sourceTree = "<group>"; };
 		EBC7389F1C536F7200ABE1DB /* Mountain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mountain.swift; sourceTree = "<group>"; };
 		EBC738A11C53769100ABE1DB /* Hill.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hill.swift; sourceTree = "<group>"; };
@@ -110,8 +112,9 @@
 				EBC738A11C53769100ABE1DB /* Hill.swift */,
 				EB37C9FD1C540C2200D99617 /* Star.swift */,
 				EBC738A31C537D4E00ABE1DB /* Environment.swift */,
-				EB37C9FB1C53FAF000D99617 /* Colors.plist */,
 				EBC738A91C53C92000ABE1DB /* PrecipitationType.swift */,
+				EB37C9FF1C54147900D99617 /* ContentView.swift */,
+				EB37CA011C54175800D99617 /* LocationManager.swift */,
 			);
 			path = Alpine;
 			sourceTree = "<group>";
@@ -186,7 +189,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB37C9FC1C53FAF000D99617 /* Colors.plist in Resources */,
 				EBC80F951C530059005CA81E /* LaunchScreen.storyboard in Resources */,
 				EBC80F921C530059005CA81E /* Assets.xcassets in Resources */,
 				EBC80F901C530059005CA81E /* Main.storyboard in Resources */,
@@ -250,6 +252,8 @@
 			files = (
 				EBC7389C1C53664100ABE1DB /* Tree.swift in Sources */,
 				EBC738AA1C53C92000ABE1DB /* PrecipitationType.swift in Sources */,
+				EB37CA021C54175800D99617 /* LocationManager.swift in Sources */,
+				EB37CA001C54147900D99617 /* ContentView.swift in Sources */,
 				EB13C9291C534BE900F33EFA /* Snowflake.swift in Sources */,
 				EB13C9271C53438200F33EFA /* PrecipitationLayer.swift in Sources */,
 				EBC738A61C53807100ABE1DB /* Raindrop.swift in Sources */,
