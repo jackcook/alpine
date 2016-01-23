@@ -29,9 +29,9 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         
         var environment = Environment()
-        environment.season = .Winter
-        environment.precipitationType = .Snow
-        environment.time = .Day
+        environment.season = .Fall
+        environment.precipitationType = .Rain
+        environment.time = .Night
         
         landscape = LandscapeLayer(environment: environment)
         view.layer.addSublayer(landscape)
@@ -39,7 +39,10 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         statusBarView = UIView(frame: CGRectMake(0, 0, view.bounds.width, 20))
         statusBarView.backgroundColor = environment.distantMountainColor
         
-        contentView = ContentView()
+        let white = environment.hillColor.isEqual(MaterialColors.Cyan.P50.color)
+        let color = white ? MaterialColors.BlueGrey.P500.color : UIColor.whiteColor()
+        
+        contentView = ContentView(color: color)
         contentView.delegate = self
         
         view.addSubview(contentView)

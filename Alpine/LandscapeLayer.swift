@@ -138,11 +138,11 @@ class LandscapeLayer: CALayer {
         let color = environment.hillColor
         
         let hill = Hill(environment: environment)
-        hill.frame = CGRectMake(0, 500, bounds.width, 100)
+        hill.frame = CGRectMake(0, 600, bounds.width, 100)
         
         let fillLayer = CALayer()
         fillLayer.backgroundColor = color.CGColor
-        fillLayer.frame = CGRectMake(0, 600, bounds.width, 2000)
+        fillLayer.frame = CGRectMake(0, 700, bounds.width, 2000)
         
         hills.addSublayer(hill)
         hills.addSublayer(fillLayer)
