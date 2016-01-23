@@ -27,7 +27,9 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let environment = Environment.forestDaytime()
+        var environment = Environment()
+        environment.season = .Summer
+        environment.precipitationType = .None
         
         landscape = LandscapeLayer(environment: environment)
         view.layer.addSublayer(landscape)
