@@ -14,8 +14,8 @@ struct Environment {
     var time: Time?
     
     enum Time: Int {
-        case Day = 0
-        case Night
+        case Night = 0
+        case Day
     }
     
     var season: Season?

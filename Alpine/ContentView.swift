@@ -95,13 +95,13 @@ class ContentView: UIScrollView {
         
         hourlyLabel.frame = CGRectMake((bounds.width - hourlyLabel.bounds.width) / 2, sunsetLabel.frame.origin.y + sunsetLabel.bounds.height + 32, hourlyLabel.bounds.width, hourlyLabel.bounds.height)
         
-        hourlyContent.frame = CGRectMake(24, hourlyLabel.frame.origin.y + hourlyLabel.bounds.height + 12, bounds.width - 64, (bounds.width - 64) * (96/309))
+        hourlyContent.frame = CGRectMake(24, hourlyLabel.frame.origin.y + hourlyLabel.bounds.height + 14, bounds.width - 64, (bounds.width - 64) * (96/309))
         
         dailyLabel.frame = CGRectMake((bounds.width - dailyLabel.bounds.width) / 2, hourlyContent.frame.origin.y + hourlyContent.bounds.height + 32, dailyLabel.bounds.width, dailyLabel.bounds.height)
         
-        dailyContent.frame = CGRectMake(24, dailyLabel.frame.origin.y + dailyLabel.bounds.height + 12, bounds.width - 64, (bounds.width - 64) * (96/309))
+        dailyContent.frame = CGRectMake(24, dailyLabel.frame.origin.y + dailyLabel.bounds.height + 14, bounds.width - 64, (bounds.width - 64) * (96/309))
         
-        contentSize = CGSizeMake(bounds.width, dailyContent.frame.origin.y + dailyContent.bounds.height + 48)
+        contentSize = CGSizeMake(bounds.width, dailyContent.frame.origin.y + dailyContent.bounds.height + 32)
     }
     
     // MARK: Private Methods
@@ -114,7 +114,7 @@ class ContentView: UIScrollView {
         
         temperatureLabel = UILabel()
         temperatureLabel.font = UIFont.systemFontOfSize(96, weight: UIFontWeightRegular)
-        temperatureLabel.text = String(Int(forecast.temperature!))
+        temperatureLabel.text = String(Int(forecast.temperature))
         temperatureLabel.textColor = UIColor.whiteColor()
         addSubview(temperatureLabel)
         
@@ -138,7 +138,7 @@ class ContentView: UIScrollView {
         
         sunriseValueLabel = UILabel()
         sunriseValueLabel.font = UIFont.systemFontOfSize(16, weight: UIFontWeightSemibold)
-        sunriseValueLabel.text = sunFormatter.stringFromDate(forecast.sunrise!)
+        sunriseValueLabel.text = sunFormatter.stringFromDate(forecast.sunrise)
         sunriseValueLabel.textColor = tintColor
         addSubview(sunriseValueLabel)
         
@@ -150,7 +150,7 @@ class ContentView: UIScrollView {
         
         sunsetValueLabel = UILabel()
         sunsetValueLabel.font = UIFont.systemFontOfSize(16, weight: UIFontWeightSemibold)
-        sunsetValueLabel.text = sunFormatter.stringFromDate(forecast.sunset!)
+        sunsetValueLabel.text = sunFormatter.stringFromDate(forecast.sunset)
         sunsetValueLabel.textColor = tintColor
         addSubview(sunsetValueLabel)
         
@@ -167,7 +167,7 @@ class ContentView: UIScrollView {
             
             let date = NSDate(timeIntervalSinceNow: 3600 * (Double(i) + 1))
             
-            let entry = ForecastEntryView(icon: "Sun", text: formatter.stringFromDate(date), temperature: Int(forecast.sixHourTemperature![i]), chance: Int(forecast.sixHourPrecipitation![i] * 100), color: tintColor)
+            let entry = ForecastEntryView(icon: "Sun", text: formatter.stringFromDate(date), temperature: Int(forecast.sixHourTemperature[i]), chance: Int(forecast.sixHourPrecipitation[i] * 100), color: tintColor)
             entry.tag = i
             hourlyContent.addSubview(entry)
         }
@@ -186,7 +186,7 @@ class ContentView: UIScrollView {
             
             let date = NSDate(timeIntervalSinceNow: 86400 * (Double(i) + 1))
             
-            let entry = ForecastEntryView(icon: "Sun", text: formatter.stringFromDate(date).uppercaseString, temperature: Int(forecast.sixDayTemperature![i]), chance: Int(forecast.sixDayPrecipitation![i] * 100), color: tintColor)
+            let entry = ForecastEntryView(icon: "Sun", text: formatter.stringFromDate(date).uppercaseString, temperature: Int(forecast.sixDayTemperature[i]), chance: Int(forecast.sixDayPrecipitation[i] * 100), color: tintColor)
             entry.tag = i
             dailyContent.addSubview(entry)
         }

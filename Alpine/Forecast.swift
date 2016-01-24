@@ -24,9 +24,20 @@ class Forecast {
     var sixDayPrecipitation: [Float]
     
     var coordinate: CLLocationCoordinate2D
-    var icon: UIImage
+    var icon: String
     var sunrise: NSDate
     var sunset: NSDate
+    
+    var environment: Environment {
+        get {
+            var environment = Environment()
+            environment.season = season
+            environment.precipitationType = icon == "rain" ? .Rain : (icon == "snow" ? .Snow : .Nothing)
+            environment.time = day
+            
+            return environment
+        }
+    }
     
     init(json: JSON) {
         temperature = json["currentTemp"].float!
@@ -76,7 +87,7 @@ class Forecast {
         let lng = json["long"].double!
         coordinate = CLLocationCoordinate2DMake(lat, lng)
         
-        icon = UIImage(named: json["icon"].string!)!
+        icon = json["currentPrecip"].string!
         
         let sunriseTimestamp = json["sunriseTime"].double!
         sunrise = NSDate(timeIntervalSince1970: sunriseTimestamp)

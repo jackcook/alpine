@@ -43,13 +43,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         LocationManager.sharedManager.startLocationUpdates { (coordinate) -> Void in
             Forecast.getForecast(coordinate, completion: { (forecast) -> Void in
                 self.forecast = forecast
-                
-                var environment = Environment()
-                environment.season = Environment.Season(rawValue: forecast.season!)
-                environment.precipitationType = forecast.icon! == "rain" ? .Rain : (forecast.icon! == "snow" ? .Snow : .Nothing)
-                environment.time = forecast.day! == 1 ? .Day : .Night
-                
-                self.environment = environment
+                self.environment = forecast.environment
                 
                 LocationManager.sharedManager.getNameFromCoordinate(coordinate, completion: { (name) -> Void in
                     self.locationName = name
