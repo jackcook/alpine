@@ -27,6 +27,7 @@
 		EBC80F901C530059005CA81E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBC80F8E1C530059005CA81E /* Main.storyboard */; };
 		EBC80F921C530059005CA81E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBC80F911C530059005CA81E /* Assets.xcassets */; };
 		EBC80F951C530059005CA81E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBC80F931C530059005CA81E /* LaunchScreen.storyboard */; };
+		EBCC23381C544DA2002377EC /* ForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC23371C544DA2002377EC /* ForecastView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		EBC80F911C530059005CA81E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EBC80F941C530059005CA81E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EBC80F961C530059005CA81E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EBCC23371C544DA2002377EC /* ForecastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 			children = (
 				EBC80F8A1C530059005CA81E /* AppDelegate.swift */,
 				EBC80F8C1C530059005CA81E /* ViewController.swift */,
+				EBCC23371C544DA2002377EC /* ForecastView.swift */,
 				EBC80F8E1C530059005CA81E /* Main.storyboard */,
 				EBC80F911C530059005CA81E /* Assets.xcassets */,
 				EBC80F931C530059005CA81E /* LaunchScreen.storyboard */,
@@ -254,6 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBC7389C1C53664100ABE1DB /* Tree.swift in Sources */,
+				EBCC23381C544DA2002377EC /* ForecastView.swift in Sources */,
 				EBC738AA1C53C92000ABE1DB /* PrecipitationType.swift in Sources */,
 				EB37CA021C54175800D99617 /* LocationManager.swift in Sources */,
 				EB37CA001C54147900D99617 /* ContentView.swift in Sources */,

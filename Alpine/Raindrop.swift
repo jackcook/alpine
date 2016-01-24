@@ -27,7 +27,7 @@ class Raindrop: Precipitation {
         fillColor = color.CGColor
         self.path = path.CGPath
         
-        fallSpeed = 5.0
+        fallSpeed = 7.5
     }
     
     required init?(coder aDecoder: NSCoder) {

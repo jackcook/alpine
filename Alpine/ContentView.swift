@@ -14,7 +14,9 @@ class ContentView: UIScrollView {
     // MARK: Properties
     
     private var temperatureLabel: UILabel!
+    private var degreeSymbol: UILabel!
     private var locationLabel: UILabel!
+    var pageControl: UIPageControl!
     
     private var sunriseLabel: UILabel!
     private var sunriseValueLabel: UILabel!
@@ -50,6 +52,7 @@ class ContentView: UIScrollView {
         super.layoutSubviews()
         
         temperatureLabel.sizeToFit()
+        degreeSymbol.sizeToFit()
         locationLabel.sizeToFit()
         sunriseLabel.sizeToFit()
         sunriseValueLabel.sizeToFit()
@@ -70,9 +73,13 @@ class ContentView: UIScrollView {
             view.frame = CGRectMake(t < 3 ? 0 : dailyContent.bounds.width / 2, dailyContent.bounds.height / 3 * (t < 3 ? t : t - 3), dailyContent.bounds.width / 2, dailyContent.bounds.height / 3)
         }
         
-        temperatureLabel.frame = CGRectMake((frame.size.width - temperatureLabel.frame.size.width) / 2, (bounds.size.height - temperatureLabel.frame.size.height - locationLabel.frame.size.height - 8) / 2.25, temperatureLabel.frame.size.width, temperatureLabel.frame.size.height)
+        temperatureLabel.frame = CGRectMake((frame.size.width - temperatureLabel.frame.size.width) / 2, (bounds.size.height - temperatureLabel.frame.size.height - locationLabel.frame.size.height - pageControl.frame.size.height - 16) / 2.25, temperatureLabel.frame.size.width, temperatureLabel.frame.size.height)
         
-        locationLabel.frame = CGRectMake((frame.size.width - locationLabel.frame.size.width) / 2, temperatureLabel.frame.origin.y + temperatureLabel.frame.size.height + 8, locationLabel.frame.size.width, locationLabel.frame.size.height)
+        degreeSymbol.frame = CGRectMake(temperatureLabel.frame.origin.x + temperatureLabel.bounds.width, temperatureLabel.frame.origin.y + 12, degreeSymbol.bounds.width, degreeSymbol.bounds.height)
+        
+        locationLabel.frame = CGRectMake((frame.size.width - locationLabel.frame.size.width) / 2, temperatureLabel.frame.origin.y + temperatureLabel.frame.size.height, locationLabel.frame.size.width, locationLabel.frame.size.height)
+        
+        pageControl.frame = CGRectMake((frame.size.width - pageControl.bounds.width) / 2, locationLabel.frame.origin.y + locationLabel.bounds.height + 16, pageControl.bounds.width, pageControl.bounds.width)
         
         sunriseLabel.frame = CGRectMake(32, bounds.height + 32, sunriseLabel.bounds.width, sunriseLabel.bounds.height)
         
@@ -104,9 +111,18 @@ class ContentView: UIScrollView {
         
         temperatureLabel = UILabel()
         temperatureLabel.font = UIFont.systemFontOfSize(96, weight: UIFontWeightRegular)
-        temperatureLabel.text = "25°"
+        temperatureLabel.text = "25"
         temperatureLabel.textColor = UIColor.whiteColor()
         addSubview(temperatureLabel)
+        
+        degreeSymbol = UILabel()
+        degreeSymbol.font = UIFont.systemFontOfSize(48, weight: UIFontWeightRegular)
+        degreeSymbol.text = "º"
+        degreeSymbol.textColor = UIColor.whiteColor()
+        addSubview(degreeSymbol)
+        
+        pageControl = UIPageControl()
+        addSubview(pageControl)
         
         sunriseLabel = UILabel()
         sunriseLabel.font = UIFont.systemFontOfSize(16, weight: UIFontWeightSemibold)

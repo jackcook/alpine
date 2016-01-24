@@ -14,11 +14,9 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: Properties
     
-    private var landscape: LandscapeLayer!
-    private var precipitation: PrecipitationLayer!
-    
     private var statusBarView: UIView!
-    private var contentView: ContentView!
+    private var mainScrollview: UIScrollView!
+    private var forecasts: [ForecastView]!
     
     private var locationManager: LocationManager!
     private var motionManager: CMMotionManager!
@@ -28,39 +26,55 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var environment = Environment()
-        environment.season = .Fall
-        environment.precipitationType = .Rain
-        environment.time = .Night
-        
-        landscape = LandscapeLayer(environment: environment)
-        view.layer.addSublayer(landscape)
-        
         statusBarView = UIView(frame: CGRectMake(0, 0, view.bounds.width, 20))
-        statusBarView.backgroundColor = environment.distantMountainColor
+        statusBarView.backgroundColor = MaterialColors.BlueGrey.P500.color
         
-        let white = environment.hillColor.isEqual(MaterialColors.Cyan.P50.color)
-        let color = white ? MaterialColors.BlueGrey.P500.color : UIColor.whiteColor()
-        
-        contentView = ContentView(color: color)
-        contentView.delegate = self
-        
-        view.addSubview(contentView)
         view.addSubview(statusBarView)
         
-        if environment.precipitationType != .None {
-            precipitation = PrecipitationLayer()
-            precipitation.precipitationType = environment.precipitationType
-            contentView.layer.addSublayer(precipitation)
+        mainScrollview = UIScrollView()
+        mainScrollview.bounces = false
+        mainScrollview.delegate = self
+        mainScrollview.pagingEnabled = true
+        mainScrollview.showsHorizontalScrollIndicator = false
+        view.addSubview(mainScrollview)
+        
+        let length = 2
+        
+        forecasts = [ForecastView]()
+        
+        var environment = Environment()
+        environment.season = .Fall
+        environment.precipitationType = .Nothing
+        environment.time = .Night
+        
+        let forecast = ForecastView(environment: environment)
+        forecast.contentView.pageControl.numberOfPages = length
+        forecast.tag = 0
+        forecasts.append(forecast)
+        mainScrollview.addSubview(forecast)
+        
+        var environment2 = Environment()
+        environment2.season = .Winter
+        environment2.precipitationType = .Snow
+        environment2.time = .Day
+        
+        let forecast2 = ForecastView(environment: environment2)
+        forecast2.contentView.pageControl.numberOfPages = length
+        forecast2.tag = 1
+        forecasts.append(forecast2)
+        mainScrollview.addSubview(forecast2)
+        
+        motionManager = CMMotionManager()
+        
+        motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue()) { (deviceMotion, error) -> Void in
+            guard let deviceMotion = deviceMotion else {
+                return
+            }
             
-            motionManager = CMMotionManager()
-            
-            motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue()) { (deviceMotion, error) -> Void in
-                guard let deviceMotion = deviceMotion else {
-                    return
+            for forecast in self.forecasts {
+                if let _ = forecast.precipitation {
+                    forecast.precipitation.updateTilt(CGFloat(deviceMotion.attitude.yaw))
                 }
-                
-                self.precipitation.updateTilt(CGFloat(deviceMotion.attitude.yaw))
             }
         }
         
@@ -70,13 +84,12 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        landscape.frame = view.bounds
+        mainScrollview.frame = view.bounds
+        mainScrollview.contentSize = CGSizeMake(view.bounds.width * CGFloat(forecasts.count), view.bounds.height)
         
-        if let _ = precipitation {
-            precipitation.frame = view.bounds
+        for forecast in forecasts {
+            forecast.frame = CGRectMake(view.bounds.width * CGFloat(forecast.tag), 0, view.bounds.width, view.bounds.height)
         }
-        
-        contentView.frame = view.bounds
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -86,6 +99,11 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     // MARK: UIScrollViewDelegate Methods
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        landscape.adjustForParallax(scrollView.contentOffset.y)
+        let pageWidth = scrollView.bounds.width
+        let page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1
+        
+        for forecast in forecasts {
+            forecast.contentView.pageControl.currentPage = Int(page)
+        }
     }
 }
