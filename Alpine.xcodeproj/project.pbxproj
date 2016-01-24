@@ -29,7 +29,6 @@
 		EBC80F901C530059005CA81E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBC80F8E1C530059005CA81E /* Main.storyboard */; };
 		EBC80F921C530059005CA81E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBC80F911C530059005CA81E /* Assets.xcassets */; };
 		EBC80F951C530059005CA81E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EBC80F931C530059005CA81E /* LaunchScreen.storyboard */; };
-		EBCC23381C544DA2002377EC /* ForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCC23371C544DA2002377EC /* ForecastView.swift */; };
 		EBCCDA211C54918400829530 /* Forecast.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBCCDA201C54918400829530 /* Forecast.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,7 +59,6 @@
 		EBC80F911C530059005CA81E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EBC80F941C530059005CA81E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EBC80F961C530059005CA81E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		EBCC23371C544DA2002377EC /* ForecastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForecastView.swift; sourceTree = "<group>"; };
 		EBCCDA201C54918400829530 /* Forecast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Forecast.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -109,7 +107,6 @@
 				EBC80F8A1C530059005CA81E /* AppDelegate.swift */,
 				EBC80F8C1C530059005CA81E /* MainViewController.swift */,
 				EB538F8F1C547B1E00E275A1 /* AddViewController.swift */,
-				EBCC23371C544DA2002377EC /* ForecastView.swift */,
 				EBC80F8E1C530059005CA81E /* Main.storyboard */,
 				EBC80F911C530059005CA81E /* Assets.xcassets */,
 				EBC80F931C530059005CA81E /* LaunchScreen.storyboard */,
@@ -266,7 +263,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EBC7389C1C53664100ABE1DB /* Tree.swift in Sources */,
-				EBCC23381C544DA2002377EC /* ForecastView.swift in Sources */,
 				EB538F901C547B1E00E275A1 /* AddViewController.swift in Sources */,
 				EBC738AA1C53C92000ABE1DB /* PrecipitationType.swift in Sources */,
 				EBCCDA211C54918400829530 /* Forecast.swift in Sources */,

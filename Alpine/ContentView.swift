@@ -101,7 +101,7 @@ class ContentView: UIScrollView {
         
         dailyContent.frame = CGRectMake(24, dailyLabel.frame.origin.y + dailyLabel.bounds.height + 12, bounds.width - 64, (bounds.width - 64) * (96/309))
         
-        contentSize = CGSizeMake(bounds.width, dailyContent.frame.origin.y + dailyContent.bounds.height + 32)
+        contentSize = CGSizeMake(bounds.width, dailyContent.frame.origin.y + dailyContent.bounds.height + 48)
     }
     
     // MARK: Private Methods

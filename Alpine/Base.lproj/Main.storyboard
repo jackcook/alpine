@@ -18,16 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FtL-LA-s7l">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
-                            </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMi-d0-KiM">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="20"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="ENS-rv-pcu"/>
-                                </constraints>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ia6-Zc-My4">
                                 <rect key="frame" x="534" y="44" width="42" height="42"/>
                                 <constraints>
@@ -42,16 +32,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="FtL-LA-s7l" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="16V-nh-nBR"/>
-                            <constraint firstItem="FtL-LA-s7l" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="3aD-rf-7yb"/>
                             <constraint firstItem="Ia6-Zc-My4" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="24" id="7dX-f9-iJc"/>
                             <constraint firstItem="Ia6-Zc-My4" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="32" id="IPH-bf-s3I"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="FtL-LA-s7l" secondAttribute="bottom" id="JiI-uu-gvd"/>
                             <constraint firstAttribute="trailing" secondItem="Ia6-Zc-My4" secondAttribute="trailing" constant="24" id="cD9-Te-9t9"/>
-                            <constraint firstAttribute="trailing" secondItem="iMi-d0-KiM" secondAttribute="trailing" id="cQc-eS-0GF"/>
-                            <constraint firstAttribute="trailing" secondItem="FtL-LA-s7l" secondAttribute="trailing" id="oxd-6K-2ND"/>
-                            <constraint firstItem="iMi-d0-KiM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="qe2-G1-c4s"/>
-                            <constraint firstItem="iMi-d0-KiM" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="tTV-VB-q0E"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -60,8 +43,7 @@
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="scrollView" destination="FtL-LA-s7l" id="AXs-2W-308"/>
-                        <outlet property="statusBarView" destination="iMi-d0-KiM" id="u81-rc-vff"/>
+                        <outlet property="addButton" destination="Ia6-Zc-My4" id="4J0-rq-t7j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

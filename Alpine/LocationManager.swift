@@ -156,6 +156,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         
         if let block = completionBlock {
             block(coordinate: location.coordinate)
+            completionBlock = nil
         }
         
         manager.stopUpdatingLocation()

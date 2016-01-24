@@ -15,10 +15,16 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: Properties
     
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var statusBarView: UIView!
+    @IBOutlet weak var addButton: UIButton!
     
-    private var forecasts: [ForecastView]!
+    private var contentView: ContentView!
+    private var statusBarView: UIView!
+    private var forecast: Forecast!
+    private var landscape: LandscapeLayer!
+    private var precipitation: PrecipitationLayer!
+    
+    private var coordinate: CLLocationCoordinate2D?
+    private var environment: Environment?
     
     private var locationManager: LocationManager!
     private var motionManager: CMMotionManager!
@@ -28,14 +34,8 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        statusBarView.backgroundColor = MaterialColors.BlueGrey.P500.color
-        
-        scrollView.bounces = false
-        scrollView.delegate = self
-        scrollView.pagingEnabled = true
-        scrollView.showsHorizontalScrollIndicator = false
-        
-        forecasts = [ForecastView]()
+        addButton.setImage(addButton.imageForState(.Normal)?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        addButton.tintColor = MaterialColors.DeepOrange.P500.color
         
         motionManager = CMMotionManager()
         
@@ -44,50 +44,62 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
                 return
             }
             
-            for forecast in self.forecasts {
-                if let _ = forecast.precipitation {
-                    forecast.precipitation.updateTilt(CGFloat(deviceMotion.attitude.yaw))
-                }
-            }
+            self.precipitation.updateTilt(CGFloat(deviceMotion.attitude.yaw))
+        }
+        
+        LocationManager.sharedManager.startLocationUpdates { (coordinate) -> Void in
+            Forecast.getForecast(coordinate, completion: { (forecast) -> Void in
+                self.forecast = forecast
+                
+                var environment = Environment()
+                environment.season = Environment.Season(rawValue: forecast.season!)
+                environment.precipitationType = forecast.icon! == "rain" ? .Rain : (forecast.icon! == "snow" ? .Snow : .Nothing)
+                environment.time = forecast.day! == 1 ? .Day : .Night
+                
+                self.environment = environment
+                
+                LocationManager.sharedManager.getNameFromCoordinate(coordinate, completion: { (name) -> Void in
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        self.statusBarView = UIView(frame: CGRectMake(0, 0, self.view.bounds.width, 20))
+                        self.statusBarView.backgroundColor = self.environment?.distantMountainColor
+                        self.view.addSubview(self.statusBarView)
+                        
+                        self.landscape = LandscapeLayer(environment: environment)
+                        self.view.layer.addSublayer(self.landscape)
+                        
+                        self.view.backgroundColor = self.environment?.skyColor
+                        
+                        let white = environment.hillColor.isEqual(MaterialColors.Cyan.P50.color)
+                        let color = white ? MaterialColors.BlueGrey.P50.color : UIColor.whiteColor()
+                        
+                        self.contentView = ContentView(color: color, forecast: self.forecast)
+                        self.contentView.delegate = self
+                        self.contentView.locationLabel.text = name
+                        self.view.addSubview(self.contentView)
+                    })
+                })
+            })
         }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
-        forecasts = [ForecastView]()
-        
-        let forecast = ForecastView()
-        forecast.tag = 0
-        forecasts.append(forecast)
-        scrollView.addSubview(forecast)
-        
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let storedForecasts = defaults.stringArrayForKey("Forecasts")!
-        
-        for (idx, storedCoordinate) in storedForecasts.enumerate() {
-            let components = storedCoordinate.componentsSeparatedByString(",")
-            let coordinate = CLLocationCoordinate2DMake((components[0] as NSString).doubleValue, (components[1] as NSString).doubleValue)
-            
-            let forecast = ForecastView()
-            forecast.tag = idx + 1
-            forecast.setCoordinates(coordinate)
-            forecasts.append(forecast)
-            scrollView.addSubview(forecast)
-        }
-        
-        LocationManager.sharedManager.startLocationUpdates { (coordinate) -> Void in
-            forecast.setCoordinates(coordinate)
-        }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        scrollView.contentSize = CGSizeMake(view.bounds.width * CGFloat(forecasts.count), view.bounds.height - 20)
+        if let _ = statusBarView {
+            statusBarView.frame = CGRectMake(0, 0, view.bounds.width, 20)
+        }
         
-        for forecast in forecasts {
-            forecast.frame = CGRectMake(view.bounds.width * CGFloat(forecast.tag), 0, view.bounds.width, view.bounds.height)
+        if let _ = contentView {
+            contentView.contentSize = CGSizeMake(view.bounds.width, view.bounds.height - 20)
+            contentView.frame = view.bounds
+        }
+        
+        if let _ = precipitation {
+            precipitation.frame = view.bounds
         }
     }
     
@@ -98,11 +110,6 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     // MARK: UIScrollViewDelegate Methods
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        let pageWidth = scrollView.bounds.width
-        let page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1
-        
-        for forecast in forecasts {
-//            forecast.contentView.pageControl.currentPage = Int(page)
-        }
+        landscape.adjustForParallax(scrollView.contentOffset.y)
     }
 }
