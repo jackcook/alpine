@@ -74,6 +74,8 @@ class AddViewController: UIViewController, UITableViewDataSource, UITableViewDel
             forecasts.append("\(coordinate.latitude),\(coordinate.longitude)")
             defaults.setObject(forecasts, forKey: "Forecasts")
             defaults.synchronize()
+            
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
     

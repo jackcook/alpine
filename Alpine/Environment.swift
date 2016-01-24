@@ -20,8 +20,8 @@ struct Environment {
     
     var season: Season?
     
-    enum Season {
-        case Spring
+    enum Season: Int {
+        case Spring = 0
         case Summer
         case Fall
         case Winter

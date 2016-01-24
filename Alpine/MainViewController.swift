@@ -102,7 +102,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         let page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1
         
         for forecast in forecasts {
-            forecast.contentView.pageControl.currentPage = Int(page)
+//            forecast.contentView.pageControl.currentPage = Int(page)
         }
     }
 }

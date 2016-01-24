@@ -67,16 +67,18 @@ class ForecastView: UIScrollView, UIScrollViewDelegate {
     func setCoordinates(coordinate: CLLocationCoordinate2D) {
         self.coordinate = coordinate
         
-        var environment = Environment()
-        environment.season = .Winter
-        environment.precipitationType = .Snow
-        environment.time = .Day
-        
-        self.environment = environment
-        
-        LocationManager.sharedManager.getNameFromCoordinate(coordinate) { (name) -> Void in
-            self.locationName = name
-            self.renderContentView()
+        Forecast.getForecast(coordinate) { (forecast) -> Void in
+            var environment = Environment()
+            environment.season = Environment.Season(rawValue: forecast.season!)
+            environment.precipitationType = forecast.icon! == "rain" ? .Rain : (forecast.icon! == "snow" ? .Snow : .Nothing)
+            environment.time = .Day
+            
+            self.environment = environment
+            
+            LocationManager.sharedManager.getNameFromCoordinate(coordinate) { (name) -> Void in
+                self.locationName = name
+                self.renderContentView()
+            }
         }
     }
     
