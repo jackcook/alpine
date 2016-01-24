@@ -13,8 +13,8 @@ struct Environment {
     
     var time: Time?
     
-    enum Time {
-        case Day
+    enum Time: Int {
+        case Day = 0
         case Night
     }
     

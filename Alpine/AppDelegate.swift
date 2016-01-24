@@ -14,12 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let forecasts = defaults.stringArrayForKey("Forecasts")
-        if forecasts == nil {
-            defaults.setObject([String](), forKey: "Forecasts")
-        }
-        
         return true
     }
 }

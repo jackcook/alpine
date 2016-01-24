@@ -21,6 +21,7 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     private var statusBarView: UIView!
     private var forecast: Forecast!
     private var landscape: LandscapeLayer!
+    private var locationName: String!
     private var precipitation: PrecipitationLayer!
     
     private var coordinate: CLLocationCoordinate2D?
@@ -34,18 +35,10 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = MaterialColors.BlueGrey.P500.color
+        
         addButton.setImage(addButton.imageForState(.Normal)?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         addButton.tintColor = MaterialColors.DeepOrange.P500.color
-        
-        motionManager = CMMotionManager()
-        
-        motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue()) { (deviceMotion, error) -> Void in
-            guard let deviceMotion = deviceMotion else {
-                return
-            }
-            
-            self.precipitation.updateTilt(CGFloat(deviceMotion.attitude.yaw))
-        }
         
         LocationManager.sharedManager.startLocationUpdates { (coordinate) -> Void in
             Forecast.getForecast(coordinate, completion: { (forecast) -> Void in
@@ -59,23 +52,10 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
                 self.environment = environment
                 
                 LocationManager.sharedManager.getNameFromCoordinate(coordinate, completion: { (name) -> Void in
+                    self.locationName = name
+                    
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        self.statusBarView = UIView(frame: CGRectMake(0, 0, self.view.bounds.width, 20))
-                        self.statusBarView.backgroundColor = self.environment?.distantMountainColor
-                        self.view.addSubview(self.statusBarView)
-                        
-                        self.landscape = LandscapeLayer(environment: environment)
-                        self.view.layer.addSublayer(self.landscape)
-                        
-                        self.view.backgroundColor = self.environment?.skyColor
-                        
-                        let white = environment.hillColor.isEqual(MaterialColors.Cyan.P50.color)
-                        let color = white ? MaterialColors.BlueGrey.P50.color : UIColor.whiteColor()
-                        
-                        self.contentView = ContentView(color: color, forecast: self.forecast)
-                        self.contentView.delegate = self
-                        self.contentView.locationLabel.text = name
-                        self.view.addSubview(self.contentView)
+                        self.renderWeatherData()
                     })
                 })
             })
@@ -105,6 +85,43 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return UIStatusBarStyle.LightContent
+    }
+    
+    // MARK: Private Methods
+    
+    private func renderWeatherData() {
+        statusBarView = UIView(frame: CGRectMake(0, 0, self.view.bounds.width, 20))
+        statusBarView.backgroundColor = self.environment?.distantMountainColor
+        view.addSubview(statusBarView)
+        
+        landscape = LandscapeLayer(environment: environment!)
+        view.layer.addSublayer(landscape)
+        
+        view.backgroundColor = environment?.skyColor
+        
+        let white = environment!.hillColor.isEqual(MaterialColors.Cyan.P50.color)
+        let color = white ? MaterialColors.BlueGrey.P50.color : UIColor.whiteColor()
+        
+        contentView = ContentView(color: color, forecast: forecast)
+        contentView.delegate = self
+        contentView.locationLabel.text = locationName
+        view.addSubview(contentView)
+        
+        if environment!.precipitationType != .Nothing {
+            precipitation = PrecipitationLayer()
+            precipitation.precipitationType = environment!.precipitationType
+            contentView.layer.addSublayer(precipitation)
+            
+            motionManager = CMMotionManager()
+            
+            motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue()) { (deviceMotion, error) -> Void in
+                guard let deviceMotion = deviceMotion else {
+                    return
+                }
+                
+                self.precipitation.updateTilt(CGFloat(deviceMotion.attitude.yaw))
+            }
+        }
     }
     
     // MARK: UIScrollViewDelegate Methods
