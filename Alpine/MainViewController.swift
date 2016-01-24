@@ -10,12 +10,13 @@ import CoreMotion
 import MaterialColors
 import UIKit
 
-class ViewController: UIViewController, UIScrollViewDelegate {
+class MainViewController: UIViewController, UIScrollViewDelegate {
     
     // MARK: Properties
     
-    private var statusBarView: UIView!
-    private var mainScrollview: UIScrollView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var statusBarView: UIView!
+    
     private var forecasts: [ForecastView]!
     
     private var locationManager: LocationManager!
@@ -26,24 +27,19 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        statusBarView = UIView(frame: CGRectMake(0, 0, view.bounds.width, 20))
         statusBarView.backgroundColor = MaterialColors.BlueGrey.P500.color
         
-        mainScrollview = UIScrollView()
-        mainScrollview.bounces = false
-        mainScrollview.delegate = self
-        mainScrollview.pagingEnabled = true
-        mainScrollview.showsHorizontalScrollIndicator = false
-        
-        view.addSubview(mainScrollview)
-        view.addSubview(statusBarView)
+        scrollView.bounces = false
+        scrollView.delegate = self
+        scrollView.pagingEnabled = true
+        scrollView.showsHorizontalScrollIndicator = false
         
         forecasts = [ForecastView]()
         
         let forecast = ForecastView()
         forecast.tag = 0
         forecasts.append(forecast)
-        mainScrollview.addSubview(forecast)
+        scrollView.addSubview(forecast)
         
         forecast.setWeatherData(0)
         
@@ -69,8 +65,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        mainScrollview.frame = view.bounds
-        mainScrollview.contentSize = CGSizeMake(view.bounds.width * CGFloat(forecasts.count), view.bounds.height)
+        scrollView.contentSize = CGSizeMake(view.bounds.width * CGFloat(forecasts.count), view.bounds.height)
         
         for forecast in forecasts {
             forecast.frame = CGRectMake(view.bounds.width * CGFloat(forecast.tag), 0, view.bounds.width, view.bounds.height)

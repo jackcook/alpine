@@ -71,9 +71,9 @@ class ForecastView: UIScrollView, UIScrollViewDelegate {
     
     func setWeatherData(/*forecast: Forecast*/placeholder: Int) {
         var environment = Environment()
-        environment.season = .Fall
-        environment.precipitationType = .Nothing
-        environment.time = .Night
+        environment.season = .Winter
+        environment.precipitationType = .Snow
+        environment.time = .Day
         
         self.environment = environment
         

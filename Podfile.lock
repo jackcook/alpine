@@ -1,10 +1,13 @@
 PODS:
   - MaterialColors (1.0.0)
+  - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - MaterialColors (~> 1.0)
+  - SwiftyJSON (~> 2.3)
 
 SPEC CHECKSUMS:
   MaterialColors: 292c4fe58649bddeb91d4121488312c7e5d54009
+  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 COCOAPODS: 0.39.0
