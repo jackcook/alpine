@@ -23,7 +23,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     var locationName: String?
     
-    private var completionBlock: ((name: String) -> Void)?
+    private var completionBlock: ((coordinate: CLLocationCoordinate2D) -> Void)?
     private var locationManager: CLLocationManager?
     
     // MARK: Public Methods
@@ -104,7 +104,21 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         task.resume()
     }
     
-    func startLocationUpdates(completion: (name: String) -> Void) {
+    func getNameFromCoordinate(coordinate: CLLocationCoordinate2D, completion: (name: String) -> Void) {
+        let geocoder = CLGeocoder()
+        geocoder.reverseGeocodeLocation(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)) { (placemarks, error) -> Void in
+            guard let placemark = placemarks?.first else {
+                return
+            }
+            
+            if let name = placemark.addressDictionary?[kABPersonAddressCityKey] as? String {
+                self.locationName = name
+                completion(name: name)
+            }
+        }
+    }
+    
+    func startLocationUpdates(completion: (coordinate: CLLocationCoordinate2D) -> Void) {
         completionBlock = completion
         
         locationManager = CLLocationManager()
@@ -140,19 +154,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
                 return
         }
         
-        let geocoder = CLGeocoder()
-        geocoder.reverseGeocodeLocation(location) { (placemarks, error) -> Void in
-            guard let placemark = placemarks?.first else {
-                return
-            }
-            
-            if let name = placemark.addressDictionary?[kABPersonAddressCityKey] as? String {
-                self.locationName = name
-                
-                if let block = self.completionBlock {
-                    block(name: name)
-                }
-            }
+        if let block = completionBlock {
+            block(coordinate: location.coordinate)
         }
         
         manager.stopUpdatingLocation()

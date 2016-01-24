@@ -6,6 +6,7 @@
 //  Copyright © 2016 Jack Cook. All rights reserved.
 //
 
+import CoreLocation
 import CoreMotion
 import MaterialColors
 import UIKit
@@ -36,13 +37,6 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
         
         forecasts = [ForecastView]()
         
-        let forecast = ForecastView()
-        forecast.tag = 0
-        forecasts.append(forecast)
-        scrollView.addSubview(forecast)
-        
-        forecast.setWeatherData(0)
-        
         motionManager = CMMotionManager()
         
         motionManager.startDeviceMotionUpdatesToQueue(NSOperationQueue.mainQueue()) { (deviceMotion, error) -> Void in
@@ -56,16 +50,41 @@ class MainViewController: UIViewController, UIScrollViewDelegate {
                 }
             }
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
-        LocationManager.sharedManager.startLocationUpdates { (name) -> Void in
-            forecast.setLocationName(name)
+        forecasts = [ForecastView]()
+        
+        let forecast = ForecastView()
+        forecast.tag = 0
+        forecasts.append(forecast)
+        scrollView.addSubview(forecast)
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let storedForecasts = defaults.stringArrayForKey("Forecasts")!
+        
+        for (idx, storedCoordinate) in storedForecasts.enumerate() {
+            let components = storedCoordinate.componentsSeparatedByString(",")
+            let coordinate = CLLocationCoordinate2DMake((components[0] as NSString).doubleValue, (components[1] as NSString).doubleValue)
+            
+            let forecast = ForecastView()
+            forecast.tag = idx + 1
+            forecast.setCoordinates(coordinate)
+            forecasts.append(forecast)
+            scrollView.addSubview(forecast)
+        }
+        
+        LocationManager.sharedManager.startLocationUpdates { (coordinate) -> Void in
+            forecast.setCoordinates(coordinate)
         }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        scrollView.contentSize = CGSizeMake(view.bounds.width * CGFloat(forecasts.count), view.bounds.height)
+        scrollView.contentSize = CGSizeMake(view.bounds.width * CGFloat(forecasts.count), view.bounds.height - 20)
         
         for forecast in forecasts {
             forecast.frame = CGRectMake(view.bounds.width * CGFloat(forecast.tag), 0, view.bounds.width, view.bounds.height)

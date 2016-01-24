@@ -69,7 +69,11 @@ class AddViewController: UIViewController, UITableViewDataSource, UITableViewDel
         
         let city = cities[indexPath.row]
         LocationManager.sharedManager.getCoordinatesFromPlace(city.placeId) { (coordinate) -> Void in
-            print("\(coordinate.latitude), \(coordinate.longitude)")
+            let defaults = NSUserDefaults.standardUserDefaults()
+            var forecasts = defaults.stringArrayForKey("Forecasts")!
+            forecasts.append("\(coordinate.latitude),\(coordinate.longitude)")
+            defaults.setObject(forecasts, forKey: "Forecasts")
+            defaults.synchronize()
         }
     }
     

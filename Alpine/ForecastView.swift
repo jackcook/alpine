@@ -6,6 +6,7 @@
 //  Copyright © 2016 Jack Cook. All rights reserved.
 //
 
+import CoreLocation
 import MaterialColors
 import UIKit
 
@@ -18,6 +19,7 @@ class ForecastView: UIScrollView, UIScrollViewDelegate {
     
     private var activityIndicator: UIActivityIndicatorView!
     
+    private var coordinate: CLLocationCoordinate2D?
     private var environment: Environment?
     private var landscape: LandscapeLayer!
     private var locationName: String?
@@ -62,14 +64,9 @@ class ForecastView: UIScrollView, UIScrollViewDelegate {
     
     // MARK: Public Methods
     
-    func setLocationName(name: String) {
-        locationName = name
+    func setCoordinates(coordinate: CLLocationCoordinate2D) {
+        self.coordinate = coordinate
         
-        requestsDone += 1
-        renderContentView()
-    }
-    
-    func setWeatherData(/*forecast: Forecast*/placeholder: Int) {
         var environment = Environment()
         environment.season = .Winter
         environment.precipitationType = .Snow
@@ -77,17 +74,17 @@ class ForecastView: UIScrollView, UIScrollViewDelegate {
         
         self.environment = environment
         
-        requestsDone += 1
-        renderContentView()
+        LocationManager.sharedManager.getNameFromCoordinate(coordinate) { (name) -> Void in
+            self.locationName = name
+            self.renderContentView()
+        }
     }
     
     // MARK: Private Methods
     
     private func renderContentView() {
-        guard requestsDone == requestsTotal,
-            let environment = environment,
-                let name = locationName else {
-                    return
+        guard let environment = environment else {
+            return
         }
         
         landscape = LandscapeLayer(environment: environment)
@@ -98,7 +95,7 @@ class ForecastView: UIScrollView, UIScrollViewDelegate {
         
         contentView = ContentView(color: color)
         contentView.delegate = self
-        contentView.locationLabel.text = name
+        contentView.locationLabel.text = locationName
         
         addSubview(contentView)
         
