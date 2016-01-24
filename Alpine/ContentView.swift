@@ -13,27 +13,31 @@ class ContentView: UIScrollView {
     
     // MARK: Properties
     
-    private var temperatureLabel: UILabel!
-    private var degreeSymbol: UILabel!
+    private var forecast: Forecast!
+    
+    var temperatureLabel: UILabel!
+    var degreeSymbol: UILabel!
     var locationLabel: UILabel!
     var pageControl: UIPageControl!
     
-    private var sunriseLabel: UILabel!
-    private var sunriseValueLabel: UILabel!
+    var sunriseLabel: UILabel!
+    var sunriseValueLabel: UILabel!
     
-    private var sunsetLabel: UILabel!
-    private var sunsetValueLabel: UILabel!
+    var sunsetLabel: UILabel!
+    var sunsetValueLabel: UILabel!
     
-    private var hourlyLabel: UILabel!
-    private var hourlyContent: UIView!
+    var hourlyLabel: UILabel!
+    var hourlyContent: UIView!
     
-    private var dailyLabel: UILabel!
-    private var dailyContent: UIView!
+    var dailyLabel: UILabel!
+    var dailyContent: UIView!
     
     // MARK: Initializers
     
-    init(color: UIColor) {
+    init(color: UIColor, forecast: Forecast) {
         super.init(frame: UIScreen.mainScreen().bounds)
+        
+        self.forecast = forecast
         
         tintColor = color
         
@@ -110,7 +114,7 @@ class ContentView: UIScrollView {
         
         temperatureLabel = UILabel()
         temperatureLabel.font = UIFont.systemFontOfSize(96, weight: UIFontWeightRegular)
-        temperatureLabel.text = "25"
+        temperatureLabel.text = String(Int(forecast.temperature!))
         temperatureLabel.textColor = UIColor.whiteColor()
         addSubview(temperatureLabel)
         
@@ -129,9 +133,12 @@ class ContentView: UIScrollView {
         sunriseLabel.textColor = tintColor
         addSubview(sunriseLabel)
         
+        let sunFormatter = NSDateFormatter()
+        sunFormatter.dateFormat = "h:mm a"
+        
         sunriseValueLabel = UILabel()
         sunriseValueLabel.font = UIFont.systemFontOfSize(16, weight: UIFontWeightSemibold)
-        sunriseValueLabel.text = "5:34 AM"
+        sunriseValueLabel.text = sunFormatter.stringFromDate(forecast.sunrise!)
         sunriseValueLabel.textColor = tintColor
         addSubview(sunriseValueLabel)
         
@@ -143,7 +150,7 @@ class ContentView: UIScrollView {
         
         sunsetValueLabel = UILabel()
         sunsetValueLabel.font = UIFont.systemFontOfSize(16, weight: UIFontWeightSemibold)
-        sunsetValueLabel.text = "7:28 PM"
+        sunsetValueLabel.text = sunFormatter.stringFromDate(forecast.sunset!)
         sunsetValueLabel.textColor = tintColor
         addSubview(sunsetValueLabel)
         
@@ -155,7 +162,12 @@ class ContentView: UIScrollView {
         
         hourlyContent = UIView()
         for i in 0...5 {
-            let entry = ForecastEntryView(icon: "Sun", text: "5PM", temperature: 34, chance: 16, color: tintColor)
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "ha"
+            
+            let date = NSDate(timeIntervalSinceNow: 3600 * (Double(i) + 1))
+            
+            let entry = ForecastEntryView(icon: "Sun", text: formatter.stringFromDate(date), temperature: Int(forecast.sixHourTemperature![i]), chance: Int(forecast.sixHourPrecipitation![i] * 100), color: tintColor)
             entry.tag = i
             hourlyContent.addSubview(entry)
         }
@@ -169,7 +181,12 @@ class ContentView: UIScrollView {
         
         dailyContent = UIView()
         for i in 0...5 {
-            let entry = ForecastEntryView(icon: "Sun", text: "MON", temperature: 14, chance: 53, color: tintColor)
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "EEE"
+            
+            let date = NSDate(timeIntervalSinceNow: 86400 * (Double(i) + 1))
+            
+            let entry = ForecastEntryView(icon: "Sun", text: formatter.stringFromDate(date).uppercaseString, temperature: Int(forecast.sixDayTemperature![i]), chance: Int(forecast.sixDayPrecipitation![i] * 100), color: tintColor)
             entry.tag = i
             dailyContent.addSubview(entry)
         }

@@ -15,6 +15,7 @@ class ForecastView: UIScrollView, UIScrollViewDelegate {
     // MARK: Properties
     
     var contentView: ContentView!
+    var forecast: Forecast!
     var precipitation: PrecipitationLayer!
     
     private var activityIndicator: UIActivityIndicatorView!
@@ -23,15 +24,13 @@ class ForecastView: UIScrollView, UIScrollViewDelegate {
     private var environment: Environment?
     private var landscape: LandscapeLayer!
     private var locationName: String?
-    private var requestsDone = 0
-    private var requestsTotal = 2
     
     // MARK: Initializers
     
     init() {
         super.init(frame: CGRectZero)
         
-        backgroundColor = MaterialColors.BlueGrey.P500.color
+        opaque = false
         
         activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
         activityIndicator.startAnimating()
@@ -49,7 +48,7 @@ class ForecastView: UIScrollView, UIScrollViewDelegate {
         
         activityIndicator.frame = CGRectMake((bounds.width - 32) / 2, (bounds.height - 32) / 2, 32, 32)
         
-        guard requestsDone == requestsTotal else {
+        guard landscape != nil else {
             return
         }
         
@@ -68,6 +67,8 @@ class ForecastView: UIScrollView, UIScrollViewDelegate {
         self.coordinate = coordinate
         
         Forecast.getForecast(coordinate) { (forecast) -> Void in
+            self.forecast = forecast
+            
             var environment = Environment()
             environment.season = Environment.Season(rawValue: forecast.season!)
             environment.precipitationType = forecast.icon! == "rain" ? .Rain : (forecast.icon! == "snow" ? .Snow : .Nothing)
@@ -95,7 +96,7 @@ class ForecastView: UIScrollView, UIScrollViewDelegate {
         let white = environment.hillColor.isEqual(MaterialColors.Cyan.P50.color)
         let color = white ? MaterialColors.BlueGrey.P500.color : UIColor.whiteColor()
         
-        contentView = ContentView(color: color)
+        contentView = ContentView(color: color, forecast: forecast)
         contentView.delegate = self
         contentView.locationLabel.text = locationName
         

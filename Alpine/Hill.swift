@@ -32,7 +32,7 @@ class Hill: CAShapeLayer {
         let v = CGFloat(arc4random_uniform(UInt32(maxVariance - minVariance))) + minVariance
         
         let path = UIBezierPath()
-        path.moveToPoint(CGPointMake(0, 100))
+        path.moveToPoint(CGPointMake(0, 160))
         
         var x: CGFloat = 0
         while x < UIScreen.mainScreen().bounds.width {
@@ -40,7 +40,7 @@ class Hill: CAShapeLayer {
             x += 1
         }
         
-        path.addLineToPoint(CGPointMake(UIScreen.mainScreen().bounds.width, 100))
+        path.addLineToPoint(CGPointMake(UIScreen.mainScreen().bounds.width, 160))
         path.closePath()
         
         fillColor = environment.hillColor.CGColor

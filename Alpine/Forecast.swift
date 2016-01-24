@@ -15,11 +15,13 @@ class Forecast {
     var temperature: Float?
     var sunrise: NSDate?
     var sunset: NSDate?
-    var sixDayForecast: [[Float]]?
+    var sixDayTemperature: [Float]?
+    var sixDayPrecipitation: [Float]?
     var precipChance: Float?
     var humidity: Int?
     var icon: String?
-    var sixHourForecast: [[Float]]?
+    var sixHourTemperature: [Float]?
+    var sixHourPrecipitation: [Float]?
     var day: Int?
     var season: Int?
     
@@ -29,14 +31,54 @@ class Forecast {
         let lat = json["lati"].double!
         let lng = json["long"].double!
         coordinate = CLLocationCoordinate2DMake(lat, lng)
-        temperature = json["temperature"].float
-        //sunrise
-        //sunset
-        //sixday
+        temperature = json["currentTemp"].float
+        
+        let sunriseTimestamp = json["sunriseTime"].double!
+        sunrise = NSDate(timeIntervalSince1970: sunriseTimestamp)
+        
+        let sunsetTimestamp = json["sunsetTime"].double!
+        sunset = NSDate(timeIntervalSince1970: sunsetTimestamp)
+        
+        sixDayTemperature = [Float]()
+        sixDayPrecipitation = [Float]()
+        
+        let sixDay = json["sixDayForecast"].array!
+        for (idx, x) in sixDay.enumerate() {
+            if let y = x.array {
+                for z in y {
+                    if let a = z.float {
+                        if idx == 0 {
+                            sixDayTemperature?.append(a)
+                        } else {
+                            sixDayPrecipitation?.append(a)
+                        }
+                    }
+                }
+            }
+        }
+        
         precipChance = json["precipProb"].float
         humidity = json["humidity"].int
         icon = json["currentPrecip"].string
-        //sixhour
+        
+        sixHourTemperature = [Float]()
+        sixHourPrecipitation = [Float]()
+        
+        let sixHour = json["sixHourForecast"].array!
+        for (idx, x) in sixHour.enumerate() {
+            if let y = x.array {
+                for z in y {
+                    if let a = z.float {
+                        if idx == 0 {
+                            sixHourTemperature?.append(a)
+                        } else {
+                            sixHourPrecipitation?.append(a)
+                        }
+                    }
+                }
+            }
+        }
+        
         day = json["day"].int
         season = json["season"].int
     }

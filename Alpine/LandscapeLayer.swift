@@ -106,7 +106,7 @@ class LandscapeLayer: CALayer {
         let bounds = UIScreen.mainScreen().bounds
         let color = environment.nearMountainColor
         
-        let baseY: CGFloat = 410
+        let baseY: CGFloat = 380
         let minDistance: CGFloat = 40
         let maxDistance: CGFloat = 60
         
@@ -138,7 +138,7 @@ class LandscapeLayer: CALayer {
         let color = environment.hillColor
         
         let hill = Hill(environment: environment)
-        hill.frame = CGRectMake(0, 600, bounds.width, 100)
+        hill.frame = CGRectMake(0, 540, bounds.width, 160)
         
         let fillLayer = CALayer()
         fillLayer.backgroundColor = color.CGColor
