@@ -29,40 +29,23 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         statusBarView = UIView(frame: CGRectMake(0, 0, view.bounds.width, 20))
         statusBarView.backgroundColor = MaterialColors.BlueGrey.P500.color
         
-        view.addSubview(statusBarView)
-        
         mainScrollview = UIScrollView()
         mainScrollview.bounces = false
         mainScrollview.delegate = self
         mainScrollview.pagingEnabled = true
         mainScrollview.showsHorizontalScrollIndicator = false
-        view.addSubview(mainScrollview)
         
-        let length = 2
+        view.addSubview(mainScrollview)
+        view.addSubview(statusBarView)
         
         forecasts = [ForecastView]()
         
-        var environment = Environment()
-        environment.season = .Fall
-        environment.precipitationType = .Nothing
-        environment.time = .Night
-        
-        let forecast = ForecastView(environment: environment)
-        forecast.contentView.pageControl.numberOfPages = length
+        let forecast = ForecastView()
         forecast.tag = 0
         forecasts.append(forecast)
         mainScrollview.addSubview(forecast)
         
-        var environment2 = Environment()
-        environment2.season = .Winter
-        environment2.precipitationType = .Snow
-        environment2.time = .Day
-        
-        let forecast2 = ForecastView(environment: environment2)
-        forecast2.contentView.pageControl.numberOfPages = length
-        forecast2.tag = 1
-        forecasts.append(forecast2)
-        mainScrollview.addSubview(forecast2)
+        forecast.setWeatherData(0)
         
         motionManager = CMMotionManager()
         
@@ -78,7 +61,9 @@ class ViewController: UIViewController, UIScrollViewDelegate {
             }
         }
         
-        LocationManager.sharedManager.startLocationUpdates()
+        LocationManager.sharedManager.startLocationUpdates { (name) -> Void in
+            forecast.setLocationName(name)
+        }
     }
     
     override func viewDidLayoutSubviews() {

@@ -15,7 +15,7 @@ class ContentView: UIScrollView {
     
     private var temperatureLabel: UILabel!
     private var degreeSymbol: UILabel!
-    private var locationLabel: UILabel!
+    var locationLabel: UILabel!
     var pageControl: UIPageControl!
     
     private var sunriseLabel: UILabel!
@@ -105,7 +105,6 @@ class ContentView: UIScrollView {
     private func renderContentView() {
         locationLabel = UILabel()
         locationLabel.font = UIFont.systemFontOfSize(18, weight: UIFontWeightMedium)
-        locationLabel.text = "Philadelphia"
         locationLabel.textColor = UIColor.whiteColor()
         addSubview(locationLabel)
         

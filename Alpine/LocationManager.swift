@@ -20,11 +20,16 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         return Static.instance
     }
     
+    var locationName: String?
+    
+    private var completionBlock: ((name: String) -> Void)?
     private var locationManager: CLLocationManager?
     
     // MARK: Public Methods
     
-    func startLocationUpdates() {
+    func startLocationUpdates(completion: (name: String) -> Void) {
+        completionBlock = completion
+        
         locationManager = CLLocationManager()
         locationManager?.requestWhenInUseAuthorization()
         
@@ -35,8 +40,9 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     // MARK: CLLocationManagerDelegate Methods
     
     @objc func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.last else {
-            return
+        guard locationName == nil,
+            let location = locations.last else {
+                return
         }
         
         let geocoder = CLGeocoder()
@@ -45,8 +51,12 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
                 return
             }
             
-            if let name = placemark.addressDictionary?[kABPersonAddressCityKey] {
-                print(name)
+            if let name = placemark.addressDictionary?[kABPersonAddressCityKey] as? String {
+                self.locationName = name
+                
+                if let block = self.completionBlock {
+                    block(name: name)
+                }
             }
         }
         
